@@ -18,18 +18,13 @@ export async function POST(req: NextRequest) {
     const validatedData = registerSchema.parse(body)
 
     // Check if hospital already exists
-    const existingHospital = await prisma.hospital.findFirst({
-      where: {
-        OR: [
-          { email: validatedData.email },
-          { licenseNumber: validatedData.licenseNumber }
-        ]
-      }
+    const existingHospital = await prisma.hospital.findUnique({
+      where: { email: validatedData.email }
     })
 
     if (existingHospital) {
       return NextResponse.json(
-        { error: 'Hospital with this email or license number already exists' },
+        { error: 'Hospital with this email already exists' },
         { status: 400 }
       )
     }
@@ -48,7 +43,6 @@ export async function POST(req: NextRequest) {
         name: true,
         email: true,
         address: true,
-        licenseNumber: true,
         phoneNumber: true
       }
     })
