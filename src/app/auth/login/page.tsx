@@ -10,7 +10,7 @@ function LoginForm() {
   const searchParams = useSearchParams()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [userType, setUserType] = useState<'hospital' | 'courier' | 'admin'>('hospital')
+  const [userType, setUserType] = useState<'hospital' | 'admin'>('hospital')
 
   const registered = searchParams.get('registered')
 
@@ -36,8 +36,6 @@ function LoginForm() {
     // Redirect based on user type
     if (userType === 'hospital') {
       router.push('/dashboard')
-    } else if (userType === 'courier') {
-      router.push('/courier/dashboard')
     } else {
       router.push('/admin/dashboard')
     }
@@ -76,17 +74,6 @@ function LoginForm() {
               }`}
             >
               Hospital
-            </button>
-            <button
-              type="button"
-              onClick={() => setUserType('courier')}
-              className={`flex-1 py-2 px-4 rounded-md transition-colors ${
-                userType === 'courier'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              Courier
             </button>
             <button
               type="button"

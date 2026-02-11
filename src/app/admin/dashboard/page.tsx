@@ -10,7 +10,6 @@ interface Stats {
   totalRevenue: number
   activeListings: number
   totalHospitals: number
-  totalCouriers: number
 }
 
 interface Order {
@@ -89,11 +88,11 @@ export default function AdminDashboardPage() {
         </div>
 
         {stats && (
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">📊</div>
-              <div className="text-2xl font-bold text-gray-800">{stats.totalOrders}</div>
-              <div className="text-sm text-gray-900">Total Orders</div>
+              <div className="text-2xl font-bold text-gray-900">{stats.totalOrders}</div>
+              <div className="text-sm text-gray-900 font-medium">Total Orders</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
@@ -101,25 +100,19 @@ export default function AdminDashboardPage() {
               <div className="text-2xl font-bold text-green-600">
                 ${stats.totalRevenue.toFixed(2)}
               </div>
-              <div className="text-sm text-gray-900">Total Revenue (Service Fees)</div>
+              <div className="text-sm text-gray-900 font-medium">Total Revenue (Service Fees)</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">📋</div>
-              <div className="text-2xl font-bold text-gray-800">{stats.activeListings}</div>
-              <div className="text-sm text-gray-900">Active Listings</div>
+              <div className="text-2xl font-bold text-gray-900">{stats.activeListings}</div>
+              <div className="text-sm text-gray-900 font-medium">Active Listings</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">🏥</div>
-              <div className="text-2xl font-bold text-gray-800">{stats.totalHospitals}</div>
-              <div className="text-sm text-gray-900">Registered Hospitals</div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="text-3xl mb-2">🚗</div>
-              <div className="text-2xl font-bold text-gray-800">{stats.totalCouriers}</div>
-              <div className="text-sm text-gray-900">Registered Couriers</div>
+              <div className="text-2xl font-bold text-gray-900">{stats.totalHospitals}</div>
+              <div className="text-sm text-gray-900 font-medium">Registered Hospitals</div>
             </div>
           </div>
         )}
@@ -133,21 +126,21 @@ export default function AdminDashboardPage() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-3 px-4">Order ID</th>
-                    <th className="text-left py-3 px-4">Buyer</th>
-                    <th className="text-left py-3 px-4">Seller</th>
-                    <th className="text-left py-3 px-4">Total</th>
-                    <th className="text-left py-3 px-4">Status</th>
-                    <th className="text-left py-3 px-4">Date</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Order ID</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Buyer</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Seller</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Total</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
+                    <th className="text-left py-3 px-4 font-semibold text-gray-900">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recentOrders.map((order) => (
                     <tr key={order.id} className="border-b hover:bg-gray-50">
-                      <td className="py-3 px-4 text-sm font-mono">{order.id.slice(0, 8)}...</td>
-                      <td className="py-3 px-4">{order.buyer.name}</td>
-                      <td className="py-3 px-4">{order.seller.name}</td>
-                      <td className="py-3 px-4">${order.total.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-sm font-mono text-gray-900">{order.id.slice(0, 8)}...</td>
+                      <td className="py-3 px-4 text-gray-900">{order.buyer.name}</td>
+                      <td className="py-3 px-4 text-gray-900">{order.seller.name}</td>
+                      <td className="py-3 px-4 text-gray-900 font-semibold">${order.total.toFixed(2)}</td>
                       <td className="py-3 px-4">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                           order.status === 'Delivered'
@@ -159,7 +152,7 @@ export default function AdminDashboardPage() {
                           {order.status}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-sm">
+                      <td className="py-3 px-4 text-sm text-gray-900">
                         {format(new Date(order.createdAt), 'MMM dd, yyyy')}
                       </td>
                     </tr>

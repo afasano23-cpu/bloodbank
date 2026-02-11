@@ -15,8 +15,7 @@ export async function GET(req: NextRequest) {
       totalOrders,
       totalRevenue,
       activeListings,
-      totalHospitals,
-      totalCouriers
+      totalHospitals
     ] = await Promise.all([
       prisma.order.count(),
       prisma.order.aggregate({
@@ -30,8 +29,7 @@ export async function GET(req: NextRequest) {
           quantity: { gt: 0 }
         }
       }),
-      prisma.hospital.count(),
-      prisma.courier.count()
+      prisma.hospital.count()
     ])
 
     const recentOrders = await prisma.order.findMany({
@@ -58,8 +56,7 @@ export async function GET(req: NextRequest) {
         totalOrders,
         totalRevenue: totalRevenue._sum.serviceFee || 0,
         activeListings,
-        totalHospitals,
-        totalCouriers
+        totalHospitals
       },
       recentOrders
     })

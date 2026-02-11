@@ -43,43 +43,6 @@ export const authOptions: NextAuthOptions = {
       }
     }),
     CredentialsProvider({
-      id: 'courier',
-      name: 'Courier',
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
-          return null
-        }
-
-        const courier = await prisma.courier.findUnique({
-          where: { email: credentials.email }
-        })
-
-        if (!courier) {
-          return null
-        }
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          courier.password
-        )
-
-        if (!isPasswordValid) {
-          return null
-        }
-
-        return {
-          id: courier.id,
-          email: courier.email,
-          name: courier.name,
-          role: 'courier'
-        }
-      }
-    }),
-    CredentialsProvider({
       id: 'admin',
       name: 'Admin',
       credentials: {

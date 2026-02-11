@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { listingId, quantity, deliveryMethod } = await req.json()
+    const { listingId, quantity } = await req.json()
 
     // Validate listing
     const listing = await prisma.bloodListing.findUnique({
@@ -37,8 +37,7 @@ export async function POST(req: NextRequest) {
     // Calculate pricing
     const subtotal = listing.pricePerUnit * quantity
     const serviceFee = subtotal * 0.1
-    const deliveryFee = deliveryMethod === 'Courier' ? 25 : 0
-    const total = subtotal + serviceFee + deliveryFee
+    const total = subtotal + serviceFee
 
     let paymentIntentId = null
     let clientSecret = null
@@ -75,9 +74,9 @@ export async function POST(req: NextRequest) {
         sellerId: listing.hospitalId,
         subtotal,
         serviceFee,
-        deliveryFee,
+        deliveryFee: 0,
         total,
-        deliveryMethod,
+        deliveryMethod: 'Self-pickup',
         paymentIntentId,
         items: {
           create: {
@@ -88,22 +87,6 @@ export async function POST(req: NextRequest) {
         }
       }
     })
-
-    // Create delivery record if courier is selected
-    if (deliveryMethod === 'Courier') {
-      const buyer = await prisma.hospital.findUnique({
-        where: { id: session.user.id }
-      })
-
-      await prisma.delivery.create({
-        data: {
-          orderId: order.id,
-          pickupAddress: listing.hospital.address,
-          deliveryAddress: buyer!.address,
-          distance: 10
-        }
-      })
-    }
 
     return NextResponse.json({
       clientSecret,
