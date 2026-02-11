@@ -90,7 +90,7 @@ export const authOptions: NextAuthOptions = {
       }
       // Store rememberMe flag from credentials
       if (account?.provider === 'hospital' || account?.provider === 'admin') {
-        const credentials = account as any
+        const credentials = account as Record<string, unknown>
         if (credentials.rememberMe !== undefined) {
           token.rememberMe = credentials.rememberMe === 'true' || credentials.rememberMe === true
         }
