@@ -17,6 +17,9 @@ interface Listing {
   notes: string | null
   isActive: boolean
   createdAt: string
+  _count?: {
+    offers: number
+  }
 }
 
 export default function ListingsPage() {
@@ -151,6 +154,17 @@ export default function ListingsPage() {
                     {listing.notes && (
                       <div className="mt-3 text-sm text-gray-900">
                         <span className="font-medium">Notes:</span> {listing.notes}
+                      </div>
+                    )}
+
+                    {listing._count && listing._count.offers > 0 && (
+                      <div className="mt-3">
+                        <Link
+                          href="/dashboard/offers/received"
+                          className="inline-flex items-center text-sm text-purple-600 font-medium hover:text-purple-700"
+                        >
+                          💬 {listing._count.offers} pending offer{listing._count.offers !== 1 ? 's' : ''}
+                        </Link>
                       </div>
                     )}
                   </div>
