@@ -4,9 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2026-01-28.clover'
-})
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 export async function POST(req: NextRequest) {
   try {
@@ -39,20 +37,36 @@ export async function POST(req: NextRequest) {
     // Calculate pricing
     const subtotal = listing.pricePerUnit * quantity
     const serviceFee = subtotal * 0.1
-    const deliveryFee = deliveryMethod === 'Courier' ? 25 : 0 // Simple flat rate for now
+    const deliveryFee = deliveryMethod === 'Courier' ? 25 : 0
     const total = subtotal + serviceFee + deliveryFee
 
-    // Create Stripe payment intent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(total * 100), // Convert to cents
-      currency: 'usd',
-      metadata: {
-        listingId,
-        buyerId: session.user.id,
-        sellerId: listing.hospitalId,
-        quantity: quantity.toString()
-      }
-    })
+    let paymentIntentId = null
+    let clientSecret = null
+
+    // Only use Stripe if not in demo mode and keys are configured
+    if (!isDemoMode && process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY !== '') {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: '2026-01-28.clover'
+      })
+
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(total * 100),
+        currency: 'usd',
+        metadata: {
+          listingId,
+          buyerId: session.user.id,
+          sellerId: listing.hospitalId,
+          quantity: quantity.toString()
+        }
+      })
+
+      paymentIntentId = paymentIntent.id
+      clientSecret = paymentIntent.client_secret
+    } else {
+      // Demo mode - generate fake payment intent
+      paymentIntentId = `demo_pi_${Date.now()}`
+      clientSecret = `demo_secret_${Date.now()}`
+    }
 
     // Create order
     const order = await prisma.order.create({
@@ -64,7 +78,7 @@ export async function POST(req: NextRequest) {
         deliveryFee,
         total,
         deliveryMethod,
-        paymentIntentId: paymentIntent.id,
+        paymentIntentId,
         items: {
           create: {
             listingId,
@@ -86,14 +100,15 @@ export async function POST(req: NextRequest) {
           orderId: order.id,
           pickupAddress: listing.hospital.address,
           deliveryAddress: buyer!.address,
-          distance: 10 // Would calculate based on actual addresses
+          distance: 10
         }
       })
     }
 
     return NextResponse.json({
-      clientSecret: paymentIntent.client_secret,
-      orderId: order.id
+      clientSecret,
+      orderId: order.id,
+      demoMode: isDemoMode
     })
   } catch (error) {
     console.error('Error creating checkout session:', error)

@@ -7,7 +7,9 @@ import Link from 'next/link'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+const stripePromise = stripeKey && stripeKey !== '' ? loadStripe(stripeKey) : null
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 interface Listing {
   id: string
@@ -20,12 +22,13 @@ interface Listing {
   }
 }
 
-function CheckoutForm({ listing, quantity, deliveryMethod, clientSecret, orderId }: {
+function CheckoutForm({ listing, quantity, deliveryMethod, clientSecret, orderId, demoMode }: {
   listing: Listing
   quantity: number
   deliveryMethod: string
   clientSecret: string
   orderId: string
+  demoMode: boolean
 }) {
   const stripe = useStripe()
   const elements = useElements()
@@ -35,13 +38,36 @@ function CheckoutForm({ listing, quantity, deliveryMethod, clientSecret, orderId
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setProcessing(true)
+    setError(null)
 
-    if (!stripe || !elements) {
+    // Demo mode - simulate payment
+    if (demoMode) {
+      setTimeout(async () => {
+        // Confirm payment
+        const res = await fetch('/api/payment/confirm', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId,
+            paymentIntentId: clientSecret.replace('demo_secret_', 'demo_pi_')
+          })
+        })
+
+        if (res.ok) {
+          router.push(`/checkout/success?orderId=${orderId}&payment_intent=${clientSecret.replace('demo_secret_', 'demo_pi_')}`)
+        } else {
+          setError('Payment failed')
+          setProcessing(false)
+        }
+      }, 1000)
       return
     }
 
-    setProcessing(true)
-    setError(null)
+    // Real Stripe payment
+    if (!stripe || !elements) {
+      return
+    }
 
     const { error: submitError } = await stripe.confirmPayment({
       elements,
@@ -64,58 +90,68 @@ function CheckoutForm({ listing, quantity, deliveryMethod, clientSecret, orderId
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="bg-gray-50 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-800 mb-4">Order Summary</h3>
+        <h3 className="font-semibold text-gray-900 mb-4">Order Summary</h3>
         <div className="space-y-2 mb-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between text-gray-900">
             <span>{listing.animalType} - {listing.bloodType}</span>
             <span>{quantity} units</span>
           </div>
-          <div className="flex justify-between text-sm text-gray-600">
+          <div className="flex justify-between text-sm text-gray-700">
             <span>Seller:</span>
             <span>{listing.hospital.name}</span>
           </div>
-          <div className="flex justify-between text-sm text-gray-600">
+          <div className="flex justify-between text-sm text-gray-700">
             <span>Delivery:</span>
             <span>{deliveryMethod}</span>
           </div>
         </div>
 
         <div className="border-t pt-4 space-y-2">
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm text-gray-900">
             <span>Subtotal:</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm text-gray-900">
             <span>Service Fee (10%):</span>
             <span>${serviceFee.toFixed(2)}</span>
           </div>
           {deliveryFee > 0 && (
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between text-sm text-gray-900">
               <span>Delivery Fee:</span>
               <span>${deliveryFee.toFixed(2)}</span>
             </div>
           )}
-          <div className="flex justify-between text-lg font-bold border-t pt-2">
+          <div className="flex justify-between text-lg font-bold text-gray-900 border-t pt-2">
             <span>Total:</span>
             <span>${total.toFixed(2)}</span>
           </div>
         </div>
       </div>
 
-      <div>
-        <h3 className="font-semibold text-gray-800 mb-4">Payment Information</h3>
-        <PaymentElement />
-      </div>
+      {demoMode && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <p className="text-sm text-blue-900 font-medium">
+            💡 Demo Mode: Click &quot;Pay&quot; to simulate a successful payment (no real payment required)
+          </p>
+        </div>
+      )}
+
+      {!demoMode && (
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-4">Payment Information</h3>
+          <PaymentElement />
+        </div>
+      )}
 
       {error && (
-        <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="p-3 bg-red-100 border border-red-400 text-red-900 rounded">
           {error}
         </div>
       )}
 
       <button
         type="submit"
-        disabled={!stripe || processing}
+        disabled={(!demoMode && !stripe) || processing}
         className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {processing ? 'Processing...' : `Pay $${total.toFixed(2)}`}
@@ -136,6 +172,7 @@ export default function CheckoutPage() {
   const [deliveryMethod, setDeliveryMethod] = useState<'Self-pickup' | 'Courier'>('Self-pickup')
   const [clientSecret, setClientSecret] = useState<string | null>(null)
   const [orderId, setOrderId] = useState<string | null>(null)
+  const [demoMode, setDemoMode] = useState(false)
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -174,6 +211,7 @@ export default function CheckoutPage() {
       const data = await res.json()
       setClientSecret(data.clientSecret)
       setOrderId(data.orderId)
+      setDemoMode(data.demoMode || false)
     } catch (error) {
       console.error('Error initiating checkout:', error)
     }
@@ -182,7 +220,7 @@ export default function CheckoutPage() {
   if (status === 'loading' || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl text-gray-900">Loading...</div>
       </div>
     )
   }
@@ -216,12 +254,12 @@ export default function CheckoutPage() {
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">Checkout</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Checkout</h2>
 
           {!clientSecret ? (
             <>
               <div className="mb-6">
-                <h3 className="font-semibold text-gray-800 mb-3">Select Delivery Method</h3>
+                <h3 className="font-semibold text-gray-900 mb-3">Select Delivery Method</h3>
                 <div className="space-y-3">
                   <label className="flex items-center p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50">
                     <input
@@ -233,8 +271,8 @@ export default function CheckoutPage() {
                       className="mr-3"
                     />
                     <div className="flex-1">
-                      <div className="font-medium">Self-pickup</div>
-                      <div className="text-sm text-gray-600">Pick up from seller location</div>
+                      <div className="font-medium text-gray-900">Self-pickup</div>
+                      <div className="text-sm text-gray-700">Pick up from seller location</div>
                     </div>
                     <div className="font-semibold text-green-600">Free</div>
                   </label>
@@ -249,8 +287,8 @@ export default function CheckoutPage() {
                       className="mr-3"
                     />
                     <div className="flex-1">
-                      <div className="font-medium">Courier Delivery</div>
-                      <div className="text-sm text-gray-600">Delivered to your location with tracking</div>
+                      <div className="font-medium text-gray-900">Courier Delivery</div>
+                      <div className="text-sm text-gray-700">Delivered to your location with tracking</div>
                     </div>
                     <div className="font-semibold text-blue-600">$25</div>
                   </label>
@@ -264,6 +302,15 @@ export default function CheckoutPage() {
                 Continue to Payment
               </button>
             </>
+          ) : demoMode || !stripePromise ? (
+            <CheckoutForm
+              listing={listing}
+              quantity={quantity}
+              deliveryMethod={deliveryMethod}
+              clientSecret={clientSecret}
+              orderId={orderId!}
+              demoMode={true}
+            />
           ) : (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
               <CheckoutForm
@@ -272,6 +319,7 @@ export default function CheckoutPage() {
                 deliveryMethod={deliveryMethod}
                 clientSecret={clientSecret}
                 orderId={orderId!}
+                demoMode={false}
               />
             </Elements>
           )}
