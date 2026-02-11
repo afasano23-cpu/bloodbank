@@ -152,10 +152,14 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
       <button
         type="submit"
         disabled={(!demoMode && !stripe) || processing}
-        className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-emerald-600 text-white py-3 px-6 rounded-md hover:bg-emerald-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {processing ? 'Processing...' : `Pay $${total.toFixed(2)}`}
       </button>
+
+      <div className="text-center text-xs text-gray-500 mt-2">
+        🔒 Secure payment powered by Stripe
+      </div>
     </form>
   )
 }
@@ -235,7 +239,7 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/dashboard" className="text-2xl font-bold text-blue-600">
+          <Link href="/dashboard" className="text-2xl font-bold text-blue-800">
             VetBlood Bank
           </Link>
         </div>
