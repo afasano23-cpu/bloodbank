@@ -95,6 +95,28 @@ export default function DashboardPage() {
           </Link>
 
           <Link
+            href="/dashboard/offers"
+            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div className="text-4xl mb-3">💬</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              My Offers
+            </h3>
+            <p className="text-gray-900">View offers you've made on listings</p>
+          </Link>
+
+          <Link
+            href="/dashboard/offers/received"
+            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div className="text-4xl mb-3">📬</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              Offers Received
+            </h3>
+            <p className="text-gray-900">Review and respond to buyer offers</p>
+          </Link>
+
+          <Link
             href="/dashboard/notifications"
             className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
