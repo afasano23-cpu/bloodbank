@@ -31,7 +31,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">VetBlood Bank</h1>
+          <h1 className="text-2xl font-bold text-blue-800">VetBlood Bank</h1>
           <button
             onClick={() => signOut({ callbackUrl: '/' })}
             className="px-4 py-2 text-red-600 hover:text-red-700 font-medium"
@@ -69,7 +69,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               My Purchases
             </h3>
-            <p className="text-gray-900">View your orders and track deliveries</p>
+            <p className="text-gray-900">View your orders and track pickup details</p>
           </Link>
 
           <Link
@@ -124,7 +124,7 @@ export default function DashboardPage() {
           <div className="space-y-3">
             <Link
               href="/dashboard/listings/new"
-              className="block w-full md:w-auto px-6 py-3 bg-blue-600 text-white text-center rounded-md hover:bg-blue-700 font-medium"
+              className="block w-full md:w-auto px-6 py-3 bg-emerald-600 text-white text-center rounded-md hover:bg-emerald-700 font-medium"
             >
               + Add New Blood Listing
             </Link>

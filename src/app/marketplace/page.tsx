@@ -83,7 +83,7 @@ export default function MarketplacePage() {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/dashboard" className="text-2xl font-bold text-blue-600">
+          <Link href="/dashboard" className="text-2xl font-bold text-blue-800">
             VetBlood Bank
           </Link>
         </div>
@@ -103,7 +103,7 @@ export default function MarketplacePage() {
               <select
                 value={filters.animalType}
                 onChange={(e) => setFilters({ ...filters, animalType: e.target.value, bloodType: '' })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="">All</option>
                 <option value="Dog">Dog</option>
@@ -118,7 +118,7 @@ export default function MarketplacePage() {
               <select
                 value={filters.bloodType}
                 onChange={(e) => setFilters({ ...filters, bloodType: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 disabled={!filters.animalType}
               >
                 <option value="">All</option>
@@ -139,7 +139,7 @@ export default function MarketplacePage() {
                 placeholder="0"
                 min="0"
                 step="0.01"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
 
@@ -154,7 +154,7 @@ export default function MarketplacePage() {
                 placeholder="1000"
                 min="0"
                 step="0.01"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
 
@@ -165,7 +165,7 @@ export default function MarketplacePage() {
               <select
                 value={filters.sortBy}
                 onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="createdAt">Date Posted</option>
                 <option value="price_asc">Price: Low to High</option>
