@@ -18,7 +18,6 @@ export default function RegisterPage() {
     const data = {
       name: formData.get('name') as string,
       address: formData.get('address') as string,
-      licenseNumber: formData.get('licenseNumber') as string,
       email: formData.get('email') as string,
       phoneNumber: formData.get('phoneNumber') as string,
       password: formData.get('password') as string
@@ -82,19 +81,6 @@ export default function RegisterPage() {
               type="text"
               id="address"
               name="address"
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="licenseNumber" className="block text-sm font-medium text-gray-700 mb-1">
-              License/Accreditation Number
-            </label>
-            <input
-              type="text"
-              id="licenseNumber"
-              name="licenseNumber"
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />

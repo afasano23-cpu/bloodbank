@@ -14,7 +14,7 @@ model Hospital {
   id                 String         @id @default(cuid())
   name               String
   address            String
-  licenseNumber      String         @unique
+  licenseNumber      String?        @unique
   email              String         @unique
   phoneNumber        String
   password           String
