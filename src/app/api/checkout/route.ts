@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const { listingId, quantity } = await req.json()
+    const { listingId, quantity, offerId } = await req.json()
 
     // Validate listing
     const listing = await prisma.bloodListing.findUnique({
@@ -26,7 +26,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Listing not found' }, { status: 404 })
     }
 
-    if (listing.quantity < quantity) {
+    let pricePerUnit = listing.pricePerUnit
+    let finalQuantity = quantity
+
+    // If offerId provided, use accepted offer price
+    if (offerId) {
+      const offer = await prisma.offer.findUnique({
+        where: { id: offerId }
+      })
+
+      if (offer && offer.status === 'Accepted' && offer.buyerId === session.user.id) {
+        pricePerUnit = offer.offeredPrice
+        finalQuantity = offer.quantity
+      }
+    }
+
+    if (listing.quantity < finalQuantity) {
       return NextResponse.json({ error: 'Insufficient quantity' }, { status: 400 })
     }
 
@@ -35,7 +50,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Calculate pricing with fees from both sides (10% each)
-    const subtotal = listing.pricePerUnit * quantity
+    const subtotal = pricePerUnit * finalQuantity
     const sellerFee = subtotal * 0.10  // 10% from seller (they receive 90%)
     const buyerFee = subtotal * 0.10   // 10% from buyer
     const sellerReceives = subtotal - sellerFee  // Seller gets 90%
@@ -57,7 +72,8 @@ export async function POST(req: NextRequest) {
           listingId,
           buyerId: session.user.id,
           sellerId: listing.hospitalId,
-          quantity: quantity.toString()
+          quantity: finalQuantity.toString(),
+          ...(offerId && { offerId })
         }
       })
 
@@ -83,8 +99,8 @@ export async function POST(req: NextRequest) {
         items: {
           create: {
             listingId,
-            quantity,
-            pricePerUnit: listing.pricePerUnit
+            quantity: finalQuantity,
+            pricePerUnit
           }
         }
       }

@@ -170,6 +170,7 @@ export default function CheckoutPage() {
   const params = useParams()
   const searchParams = useSearchParams()
   const quantity = parseInt(searchParams.get('quantity') || '1')
+  const offerId = searchParams.get('offerId')
 
   const [listing, setListing] = useState<Listing | null>(null)
   const [loading, setLoading] = useState(true)
