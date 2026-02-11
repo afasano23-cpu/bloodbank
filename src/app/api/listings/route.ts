@@ -33,6 +33,15 @@ export async function GET(req: NextRequest) {
             name: true,
             address: true
           }
+        },
+        _count: {
+          select: {
+            offers: {
+              where: {
+                status: 'Pending'
+              }
+            }
+          }
         }
       },
       orderBy: {
