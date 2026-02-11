@@ -141,10 +141,14 @@ function LoginForm() {
           </button>
         </form>
 
+        <div className="mt-4 text-center text-xs text-gray-500">
+          🔒 Your data is encrypted and secure
+        </div>
+
         {userType === 'hospital' && (
           <p className="mt-6 text-center text-sm text-gray-900">
             Don&apos;t have an account?{' '}
-            <Link href="/auth/register" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link href="/auth/register" className="text-emerald-600 hover:text-emerald-700 font-medium">
               Register here
             </Link>
           </p>
@@ -157,7 +161,7 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-emerald-50">
         <div className="text-xl">Loading...</div>
       </div>
     }>

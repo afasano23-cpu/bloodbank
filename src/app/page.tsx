@@ -29,8 +29,7 @@ export default function Home() {
             Veterinary Blood Bank Marketplace
           </h2>
           <p className="text-xl text-gray-900 max-w-3xl mx-auto mb-8">
-            Connect veterinary hospitals for life-saving blood donations.
-            Buy and sell blood products with secure delivery options.
+            Connect veterinary hospitals for life-saving blood donations with secure self-pickup.
           </p>
           <Link
             href="/auth/register"
