@@ -30,6 +30,8 @@ export default function ListingDetailPage() {
   const [listing, setListing] = useState<Listing | null>(null)
   const [loading, setLoading] = useState(true)
   const [quantity, setQuantity] = useState(1)
+  const [showOfferModal, setShowOfferModal] = useState(false)
+  const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -55,6 +57,11 @@ export default function ListingDetailPage() {
     if (listing) {
       router.push(`/checkout/${listing.id}?quantity=${quantity}`)
     }
+  }
+
+  const handleOfferSuccess = () => {
+    setSuccessMessage('Offer submitted successfully! The seller will be notified.')
+    setTimeout(() => setSuccessMessage(''), 5000)
   }
 
   if (status === 'loading' || loading) {
@@ -203,10 +210,32 @@ export default function ListingDetailPage() {
               >
                 Proceed to Checkout
               </button>
+
+              <button
+                onClick={() => setShowOfferModal(true)}
+                className="w-full mt-3 bg-purple-600 text-white py-3 px-6 rounded-md hover:bg-purple-700 font-medium text-lg"
+              >
+                💬 Make an Offer
+              </button>
+
+              {successMessage && (
+                <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <p className="text-sm text-green-800">{successMessage}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {listing && (
+        <MakeOfferModal
+          listing={listing}
+          isOpen={showOfferModal}
+          onClose={() => setShowOfferModal(false)}
+          onSuccess={handleOfferSuccess}
+        />
+      )}
     </div>
   )
 }
