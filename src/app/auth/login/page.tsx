@@ -25,6 +25,7 @@ function LoginForm() {
     const result = await signIn(userType, {
       email: formData.get('email') as string,
       password: formData.get('password') as string,
+      rememberMe: rememberMe.toString(),
       redirect: false
     })
 
@@ -43,11 +44,12 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-emerald-50 flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8 border border-gray-100">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">VetBlood Bank</h1>
-          <h2 className="text-xl font-semibold text-gray-700">Login</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-1">Login</h2>
+          <p className="text-sm text-gray-500">Secure Hospital Access Portal</p>
         </div>
 
         {registered && (
@@ -70,7 +72,7 @@ function LoginForm() {
               onClick={() => setUserType('hospital')}
               className={`flex-1 py-2 px-4 rounded-md transition-colors ${
                 userType === 'hospital'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-emerald-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
               }`}
             >
@@ -115,6 +117,19 @@ function LoginForm() {
               required
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
+          </div>
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded"
+            />
+            <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+              Remember me for 30 days
+            </label>
           </div>
 
           <button
