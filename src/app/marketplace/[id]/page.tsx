@@ -73,8 +73,8 @@ export default function ListingDetailPage() {
   }
 
   const subtotal = listing.pricePerUnit * quantity
-  const serviceFee = subtotal * 0.1
-  const total = subtotal + serviceFee
+  const buyerFee = subtotal * 0.05
+  const total = subtotal + buyerFee
 
   return (
     <div className="min-h-screen bg-gray-50">

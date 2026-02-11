@@ -82,8 +82,10 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
   }
 
   const subtotal = listing.pricePerUnit * quantity
-  const serviceFee = subtotal * 0.1
-  const total = subtotal + serviceFee
+  const sellerFee = subtotal * 0.15  // 15% seller fee
+  const buyerFee = subtotal * 0.05   // 5% buyer fee
+  const sellerReceives = subtotal - sellerFee
+  const total = subtotal + buyerFee
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -98,21 +100,31 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
             <span>Seller:</span>
             <span className="font-medium">{listing.hospital.name}</span>
           </div>
+          <div className="flex justify-between text-sm text-gray-800">
+            <span>Seller receives:</span>
+            <span className="font-medium text-green-600">${sellerReceives.toFixed(2)} (85%)</span>
+          </div>
         </div>
 
         <div className="border-t pt-4 space-y-2">
           <div className="flex justify-between text-sm text-gray-900">
-            <span>Subtotal:</span>
+            <span>Item Subtotal:</span>
             <span className="font-semibold">${subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-sm text-gray-900">
-            <span>Service Fee (10%):</span>
-            <span className="font-semibold">${serviceFee.toFixed(2)}</span>
+            <span>Service Fee (5%):</span>
+            <span className="font-semibold">${buyerFee.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-lg font-bold text-gray-900 border-t pt-2">
             <span>Total:</span>
             <span>${total.toFixed(2)}</span>
           </div>
+        </div>
+
+        <div className="mt-4 pt-4 border-t">
+          <p className="text-xs text-gray-700">
+            Platform fee: 5% from buyer + 15% from seller = 20% total platform revenue
+          </p>
         </div>
       </div>
 

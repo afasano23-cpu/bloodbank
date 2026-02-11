@@ -34,10 +34,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cannot purchase your own listing' }, { status: 400 })
     }
 
-    // Calculate pricing
+    // Calculate pricing with fees from both sides
     const subtotal = listing.pricePerUnit * quantity
-    const serviceFee = subtotal * 0.1
-    const total = subtotal + serviceFee
+    const sellerFee = subtotal * 0.15  // 15% from seller (they receive 85%)
+    const buyerFee = subtotal * 0.05   // 5% from buyer
+    const sellerReceives = subtotal - sellerFee  // Seller gets 85%
+    const total = subtotal + buyerFee  // Buyer pays listing price + 5%
 
     let paymentIntentId = null
     let clientSecret = null
@@ -73,7 +75,7 @@ export async function POST(req: NextRequest) {
         buyerId: session.user.id,
         sellerId: listing.hospitalId,
         subtotal,
-        serviceFee,
+        serviceFee: sellerFee + buyerFee,  // Total platform fee (20%)
         deliveryFee: 0,
         total,
         deliveryMethod: 'Self-pickup',
