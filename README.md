@@ -21,17 +21,17 @@ A peer-to-peer web application for veterinary hospitals to buy and sell blood pr
 ## Fee Structure (P2P Marketplace)
 
 **Transparent Fee Model:**
-- **Seller Receives**: 85% of listing price
-- **Seller Fee**: 15% (deducted from listing price)
-- **Buyer Pays**: Listing price + 5% service fee
+- **Seller Receives**: 90% of listing price
+- **Seller Fee**: 10% (deducted from listing price)
+- **Buyer Pays**: Listing price + 10% service fee
 - **Total Platform Revenue**: 20% of listing price
 
 **Example for $100 listing:**
-- Seller receives: $85
-- Buyer pays: $105
+- Seller receives: $90
+- Buyer pays: $110
 - Platform keeps: $20
 
-This dual-sided fee structure ensures fair cost distribution between buyers and sellers.
+This equal split (10% + 10%) ensures fair cost distribution between buyers and sellers.
 
 ## Test Credentials
 
@@ -109,9 +109,9 @@ This dual-sided fee structure ensures fair cost distribution between buyers and 
 
 ### 4. Transparent Pricing
 - Clear fee breakdown at checkout
-- Shows seller payout amount (85%)
-- Buyer sees 5% service fee
-- Total 20% platform revenue split fairly
+- Shows seller payout amount (90%)
+- Buyer sees 10% service fee
+- Total 20% platform revenue split equally (10% + 10%)
 
 ### 5. Order Management
 - Self-pickup only (simplified logistics)
@@ -135,7 +135,7 @@ This dual-sided fee structure ensures fair cost distribution between buyers and 
 **For Production P2P (Future Enhancement):**
 - Implement Stripe Connect for automatic fund distribution
 - Sellers connect their Stripe accounts
-- Automatic 85/15 split on each transaction
+- Automatic 90/10 split on each transaction
 - Platform fee kept automatically
 
 ## Future Enhancements

@@ -73,7 +73,7 @@ export default function ListingDetailPage() {
   }
 
   const subtotal = listing.pricePerUnit * quantity
-  const buyerFee = subtotal * 0.05
+  const buyerFee = subtotal * 0.10
   const total = subtotal + buyerFee
 
   return (
@@ -184,7 +184,7 @@ export default function ListingDetailPage() {
                   <span className="font-medium">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-gray-900">
-                  <span>Service Fee (5%):</span>
+                  <span>Service Fee (10%):</span>
                   <span className="font-medium">${buyerFee.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-lg font-bold text-gray-800 pt-2 border-t">
@@ -192,7 +192,7 @@ export default function ListingDetailPage() {
                   <span>${total.toFixed(2)}</span>
                 </div>
                 <p className="text-xs text-gray-700 pt-2">
-                  Seller receives 85% (${(subtotal * 0.85).toFixed(2)})
+                  Seller receives 90% (${(subtotal * 0.90).toFixed(2)})
                 </p>
               </div>
 

@@ -82,8 +82,8 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
   }
 
   const subtotal = listing.pricePerUnit * quantity
-  const sellerFee = subtotal * 0.15  // 15% seller fee
-  const buyerFee = subtotal * 0.05   // 5% buyer fee
+  const sellerFee = subtotal * 0.10  // 10% seller fee
+  const buyerFee = subtotal * 0.10   // 10% buyer fee
   const sellerReceives = subtotal - sellerFee
   const total = subtotal + buyerFee
 
@@ -102,7 +102,7 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
           </div>
           <div className="flex justify-between text-sm text-gray-800">
             <span>Seller receives:</span>
-            <span className="font-medium text-green-600">${sellerReceives.toFixed(2)} (85%)</span>
+            <span className="font-medium text-green-600">${sellerReceives.toFixed(2)} (90%)</span>
           </div>
         </div>
 
@@ -112,7 +112,7 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
             <span className="font-semibold">${subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-sm text-gray-900">
-            <span>Service Fee (5%):</span>
+            <span>Service Fee (10%):</span>
             <span className="font-semibold">${buyerFee.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-lg font-bold text-gray-900 border-t pt-2">
@@ -123,7 +123,7 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
 
         <div className="mt-4 pt-4 border-t">
           <p className="text-xs text-gray-700">
-            Platform fee: 5% from buyer + 15% from seller = 20% total platform revenue
+            Platform fee: 10% from buyer + 10% from seller = 20% total platform revenue
           </p>
         </div>
       </div>
