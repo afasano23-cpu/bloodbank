@@ -3,6 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Medical Color System */
+  --medical-blue-primary: #1E40AF;
+  --medical-blue-secondary: #3B82F6;
+  --medical-green-primary: #10B981;
+  --medical-green-light: #D1FAE5;
+  --medical-gray-dark: #1F2937;
+  --medical-gray-light: #F9FAFB;
 }
 
 @theme inline {
@@ -23,4 +31,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Medical Trust Badges */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--medical-green-light);
+  color: var(--medical-gray-dark);
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Medical Card Styling */
+.medical-card {
+  background: white;
+  border-left: 4px solid var(--medical-green-primary);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.medical-card:hover {
+  transform: translateY(-0.25rem);
 }
