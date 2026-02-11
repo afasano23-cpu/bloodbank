@@ -139,7 +139,7 @@ function LoginForm() {
         </form>
 
         {userType === 'hospital' && (
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-gray-900">
             Don&apos;t have an account?{' '}
             <Link href="/auth/register" className="text-blue-600 hover:text-blue-700 font-medium">
               Register here

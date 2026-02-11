@@ -85,7 +85,7 @@ export default function AdminDashboardPage() {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Admin Dashboard
           </h2>
-          <p className="text-gray-600">Platform management and analytics</p>
+          <p className="text-gray-900">Platform management and analytics</p>
         </div>
 
         {stats && (
@@ -93,7 +93,7 @@ export default function AdminDashboardPage() {
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">📊</div>
               <div className="text-2xl font-bold text-gray-800">{stats.totalOrders}</div>
-              <div className="text-sm text-gray-600">Total Orders</div>
+              <div className="text-sm text-gray-900">Total Orders</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
@@ -101,25 +101,25 @@ export default function AdminDashboardPage() {
               <div className="text-2xl font-bold text-green-600">
                 ${stats.totalRevenue.toFixed(2)}
               </div>
-              <div className="text-sm text-gray-600">Total Revenue (Service Fees)</div>
+              <div className="text-sm text-gray-900">Total Revenue (Service Fees)</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">📋</div>
               <div className="text-2xl font-bold text-gray-800">{stats.activeListings}</div>
-              <div className="text-sm text-gray-600">Active Listings</div>
+              <div className="text-sm text-gray-900">Active Listings</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">🏥</div>
               <div className="text-2xl font-bold text-gray-800">{stats.totalHospitals}</div>
-              <div className="text-sm text-gray-600">Registered Hospitals</div>
+              <div className="text-sm text-gray-900">Registered Hospitals</div>
             </div>
 
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="text-3xl mb-2">🚗</div>
               <div className="text-2xl font-bold text-gray-800">{stats.totalCouriers}</div>
-              <div className="text-sm text-gray-600">Registered Couriers</div>
+              <div className="text-sm text-gray-900">Registered Couriers</div>
             </div>
           </div>
         )}
@@ -127,7 +127,7 @@ export default function AdminDashboardPage() {
         <div className="bg-white rounded-lg shadow-md p-6">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Recent Orders</h3>
           {recentOrders.length === 0 ? (
-            <p className="text-gray-600">No orders yet</p>
+            <p className="text-gray-900">No orders yet</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">

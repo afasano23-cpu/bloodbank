@@ -80,7 +80,7 @@ export default function PurchasesPage() {
 
         {orders.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 mb-4">You haven&apos;t made any purchases yet.</p>
+            <p className="text-gray-900 mb-4">You haven&apos;t made any purchases yet.</p>
             <Link
               href="/marketplace"
               className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
@@ -97,10 +97,10 @@ export default function PurchasesPage() {
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <div className="text-sm text-gray-600 mb-1">
+                    <div className="text-sm text-gray-900 mb-1">
                       Order placed {format(new Date(order.createdAt), 'MMM dd, yyyy')}
                     </div>
-                    <div className="text-xs text-gray-500">Order ID: {order.id}</div>
+                    <div className="text-xs text-gray-700">Order ID: {order.id}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-xl font-bold text-gray-800">
@@ -125,9 +125,9 @@ export default function PurchasesPage() {
                     <div key={idx} className="flex justify-between mb-2">
                       <div>
                         <span className="font-medium">{item.listing.animalType} - {item.listing.bloodType}</span>
-                        <span className="text-gray-600 ml-2">x{item.quantity}</span>
+                        <span className="text-gray-900 ml-2">x{item.quantity}</span>
                       </div>
-                      <div className="text-gray-600">
+                      <div className="text-gray-900">
                         ${(item.pricePerUnit * item.quantity).toFixed(2)}
                       </div>
                     </div>
@@ -138,15 +138,15 @@ export default function PurchasesPage() {
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div>
                       <div className="font-medium text-gray-700 mb-1">Seller</div>
-                      <div className="text-gray-600">{order.seller.name}</div>
-                      <div className="text-gray-600">{order.seller.address}</div>
-                      <div className="text-gray-600">{order.seller.phoneNumber}</div>
+                      <div className="text-gray-900">{order.seller.name}</div>
+                      <div className="text-gray-900">{order.seller.address}</div>
+                      <div className="text-gray-900">{order.seller.phoneNumber}</div>
                     </div>
                     <div>
                       <div className="font-medium text-gray-700 mb-1">Delivery</div>
-                      <div className="text-gray-600">{order.deliveryMethod}</div>
+                      <div className="text-gray-900">{order.deliveryMethod}</div>
                       {order.delivery && (
-                        <div className="text-gray-600 mt-1">
+                        <div className="text-gray-900 mt-1">
                           Status: {order.delivery.status}
                         </div>
                       )}

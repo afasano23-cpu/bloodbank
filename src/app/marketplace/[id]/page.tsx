@@ -111,23 +111,23 @@ export default function ListingDetailPage() {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">Product Details</h3>
               <div className="space-y-3">
                 <div>
-                  <span className="text-gray-600">Available Quantity:</span>
+                  <span className="text-gray-900">Available Quantity:</span>
                   <span className="ml-2 font-medium">{listing.quantity} units</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Price per Unit:</span>
+                  <span className="text-gray-900">Price per Unit:</span>
                   <span className="ml-2 font-medium text-xl text-green-600">
                     ${listing.pricePerUnit.toFixed(2)}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Expiration Date:</span>
+                  <span className="text-gray-900">Expiration Date:</span>
                   <span className="ml-2 font-medium">
                     {format(new Date(listing.expirationDate), 'MMMM dd, yyyy')}
                   </span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Storage Conditions:</span>
+                  <span className="text-gray-900">Storage Conditions:</span>
                   <span className="ml-2 font-medium">{listing.storageConditions}</span>
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function ListingDetailPage() {
               {listing.notes && (
                 <div className="mt-6">
                   <h4 className="font-medium text-gray-800 mb-2">Additional Notes</h4>
-                  <p className="text-gray-600">{listing.notes}</p>
+                  <p className="text-gray-900">{listing.notes}</p>
                 </div>
               )}
             </div>
@@ -144,15 +144,15 @@ export default function ListingDetailPage() {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">Seller Information</h3>
               <div className="bg-gray-50 rounded-lg p-4 space-y-2">
                 <div>
-                  <span className="text-gray-600">Hospital:</span>
+                  <span className="text-gray-900">Hospital:</span>
                   <span className="ml-2 font-medium">{listing.hospital.name}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Address:</span>
+                  <span className="text-gray-900">Address:</span>
                   <span className="ml-2 font-medium">{listing.hospital.address}</span>
                 </div>
                 <div>
-                  <span className="text-gray-600">Phone:</span>
+                  <span className="text-gray-900">Phone:</span>
                   <span className="ml-2 font-medium">{listing.hospital.phoneNumber}</span>
                 </div>
               </div>
@@ -179,11 +179,11 @@ export default function ListingDetailPage() {
               </div>
 
               <div className="space-y-2 mb-6">
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-gray-900">
                   <span>Subtotal ({quantity} units):</span>
                   <span className="font-medium">${subtotal.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-gray-600">
+                <div className="flex justify-between text-gray-900">
                   <span>Service Fee (10%):</span>
                   <span className="font-medium">${serviceFee.toFixed(2)}</span>
                 </div>

@@ -49,14 +49,14 @@ export default function CourierDashboardPage() {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Courier Dashboard
           </h2>
-          <p className="text-gray-600">Welcome, {session.user.name}</p>
+          <p className="text-gray-900">Welcome, {session.user.name}</p>
         </div>
 
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-800 mb-2">Status</h3>
-              <p className="text-gray-600">
+              <p className="text-gray-900">
                 {isOnline ? 'You are online and available for deliveries' : 'You are offline'}
               </p>
             </div>
@@ -82,7 +82,7 @@ export default function CourierDashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Available Deliveries
             </h3>
-            <p className="text-gray-600">View and accept delivery requests</p>
+            <p className="text-gray-900">View and accept delivery requests</p>
           </Link>
 
           <Link
@@ -93,7 +93,7 @@ export default function CourierDashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Active Deliveries
             </h3>
-            <p className="text-gray-600">View your ongoing deliveries</p>
+            <p className="text-gray-900">View your ongoing deliveries</p>
           </Link>
 
           <Link
@@ -104,7 +104,7 @@ export default function CourierDashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Delivery History
             </h3>
-            <p className="text-gray-600">View completed deliveries</p>
+            <p className="text-gray-900">View completed deliveries</p>
           </Link>
 
           <Link
@@ -115,7 +115,7 @@ export default function CourierDashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Earnings
             </h3>
-            <p className="text-gray-600">View your earnings and payouts</p>
+            <p className="text-gray-900">View your earnings and payouts</p>
           </Link>
         </div>
       </div>

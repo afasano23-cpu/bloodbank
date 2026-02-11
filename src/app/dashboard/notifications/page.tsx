@@ -38,8 +38,8 @@ export default function NotificationsPage() {
 
         <div className="bg-white rounded-lg shadow-md p-12 text-center">
           <div className="text-6xl mb-4">🔔</div>
-          <p className="text-gray-600 mb-4">No new notifications</p>
-          <p className="text-sm text-gray-500">
+          <p className="text-gray-900 mb-4">No new notifications</p>
+          <p className="text-sm text-gray-700">
             You&apos;ll receive notifications for new orders, delivery updates, and messages.
           </p>
         </div>

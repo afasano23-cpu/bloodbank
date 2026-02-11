@@ -28,7 +28,7 @@ export default function Home() {
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
             Veterinary Blood Bank Marketplace
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-900 max-w-3xl mx-auto mb-8">
             Connect veterinary hospitals for life-saving blood donations.
             Buy and sell blood products with secure delivery options.
           </p>
@@ -46,7 +46,7 @@ export default function Home() {
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
               For Hospitals
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-900">
               List your available blood inventory and purchase what you need
               from verified veterinary hospitals.
             </p>
@@ -57,7 +57,7 @@ export default function Home() {
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
               Fast Delivery
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-900">
               Choose between self-pickup or courier delivery with real-time
               tracking for urgent needs.
             </p>
@@ -68,7 +68,7 @@ export default function Home() {
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
               Secure & Verified
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-900">
               All hospitals are verified with license numbers. Secure payments
               through Stripe.
             </p>
@@ -85,7 +85,7 @@ export default function Home() {
                 1
               </div>
               <h4 className="font-semibold mb-2">Register</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-900">
                 Sign up with your hospital credentials
               </p>
             </div>
@@ -94,7 +94,7 @@ export default function Home() {
                 2
               </div>
               <h4 className="font-semibold mb-2">Browse</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-900">
                 Search for blood by type and location
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function Home() {
                 3
               </div>
               <h4 className="font-semibold mb-2">Purchase</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-900">
                 Secure checkout with delivery options
               </p>
             </div>
@@ -112,7 +112,7 @@ export default function Home() {
                 4
               </div>
               <h4 className="font-semibold mb-2">Track</h4>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-900">
                 Real-time order and delivery tracking
               </p>
             </div>

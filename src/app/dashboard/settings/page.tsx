@@ -77,7 +77,7 @@ export default function SettingsPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100"
               />
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-900">
               To update your profile information, please contact support.
             </p>
           </div>

@@ -94,7 +94,7 @@ export default function ListingsPage() {
 
         {listings.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600 mb-4">You haven&apos;t created any listings yet.</p>
+            <p className="text-gray-900 mb-4">You haven&apos;t created any listings yet.</p>
             <Link
               href="/dashboard/listings/new"
               className="inline-block px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
@@ -129,27 +129,27 @@ export default function ListingsPage() {
 
                     <div className="grid md:grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="text-gray-600">Quantity:</span>
+                        <span className="text-gray-900">Quantity:</span>
                         <span className="ml-2 font-medium">{listing.quantity} units</span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Price:</span>
+                        <span className="text-gray-900">Price:</span>
                         <span className="ml-2 font-medium">${listing.pricePerUnit} per unit</span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Expires:</span>
+                        <span className="text-gray-900">Expires:</span>
                         <span className="ml-2 font-medium">
                           {format(new Date(listing.expirationDate), 'MMM dd, yyyy')}
                         </span>
                       </div>
                       <div>
-                        <span className="text-gray-600">Storage:</span>
+                        <span className="text-gray-900">Storage:</span>
                         <span className="ml-2 font-medium">{listing.storageConditions}</span>
                       </div>
                     </div>
 
                     {listing.notes && (
-                      <div className="mt-3 text-sm text-gray-600">
+                      <div className="mt-3 text-sm text-gray-900">
                         <span className="font-medium">Notes:</span> {listing.notes}
                       </div>
                     )}

@@ -182,7 +182,7 @@ export default function MarketplacePage() {
           </div>
         ) : listings.length === 0 ? (
           <div className="bg-white rounded-lg shadow-md p-12 text-center">
-            <p className="text-gray-600">No listings found matching your criteria.</p>
+            <p className="text-gray-900">No listings found matching your criteria.</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -203,17 +203,17 @@ export default function MarketplacePage() {
 
                 <div className="space-y-2 text-sm mb-4">
                   <div>
-                    <span className="text-gray-600">Quantity:</span>
+                    <span className="text-gray-900">Quantity:</span>
                     <span className="ml-2 font-medium">{listing.quantity} units</span>
                   </div>
                   <div>
-                    <span className="text-gray-600">Price:</span>
+                    <span className="text-gray-900">Price:</span>
                     <span className="ml-2 font-medium text-lg text-green-600">
                       ${listing.pricePerUnit}/unit
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-600">Expires:</span>
+                    <span className="text-gray-900">Expires:</span>
                     <span className="ml-2 font-medium">
                       {format(new Date(listing.expirationDate), 'MMM dd, yyyy')}
                     </span>
@@ -223,7 +223,7 @@ export default function MarketplacePage() {
                 <div className="border-t pt-4">
                   <div className="text-sm">
                     <div className="font-medium text-gray-800">{listing.hospital.name}</div>
-                    <div className="text-gray-600">{listing.hospital.address}</div>
+                    <div className="text-gray-900">{listing.hospital.address}</div>
                   </div>
                 </div>
 

@@ -46,7 +46,7 @@ export default function DashboardPage() {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             Hospital Dashboard
           </h2>
-          <p className="text-gray-600">Welcome back, {session.user.name}</p>
+          <p className="text-gray-900">Welcome back, {session.user.name}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -58,7 +58,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               My Listings
             </h3>
-            <p className="text-gray-600">Manage your blood inventory</p>
+            <p className="text-gray-900">Manage your blood inventory</p>
           </Link>
 
           <Link
@@ -69,7 +69,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               My Purchases
             </h3>
-            <p className="text-gray-600">View your orders and track deliveries</p>
+            <p className="text-gray-900">View your orders and track deliveries</p>
           </Link>
 
           <Link
@@ -80,7 +80,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               My Sales
             </h3>
-            <p className="text-gray-600">Manage incoming orders</p>
+            <p className="text-gray-900">Manage incoming orders</p>
           </Link>
 
           <Link
@@ -91,7 +91,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Marketplace
             </h3>
-            <p className="text-gray-600">Browse available blood products</p>
+            <p className="text-gray-900">Browse available blood products</p>
           </Link>
 
           <Link
@@ -102,7 +102,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Notifications
             </h3>
-            <p className="text-gray-600">View updates and messages</p>
+            <p className="text-gray-900">View updates and messages</p>
           </Link>
 
           <Link
@@ -113,7 +113,7 @@ export default function DashboardPage() {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">
               Settings
             </h3>
-            <p className="text-gray-600">Update your profile and preferences</p>
+            <p className="text-gray-900">Update your profile and preferences</p>
           </Link>
         </div>
 
