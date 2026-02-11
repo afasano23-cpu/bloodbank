@@ -77,6 +77,20 @@ export async function PUT(
     const body = await req.json()
     const validatedData = listingSchema.parse(body)
 
+    // If deactivating listing, reject all pending offers
+    if (validatedData.isActive === false && listing.isActive === true) {
+      await prisma.offer.updateMany({
+        where: {
+          listingId: id,
+          status: 'Pending'
+        },
+        data: {
+          status: 'Rejected',
+          rejectedAt: new Date()
+        }
+      })
+    }
+
     const updatedListing = await prisma.bloodListing.update({
       where: { id },
       data: {
@@ -134,6 +148,18 @@ export async function DELETE(
     if (listing.hospitalId !== session.user.id) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
+
+    // Reject all pending offers before deleting
+    await prisma.offer.updateMany({
+      where: {
+        listingId: id,
+        status: 'Pending'
+      },
+      data: {
+        status: 'Rejected',
+        rejectedAt: new Date()
+      }
+    })
 
     await prisma.bloodListing.delete({
       where: { id }
