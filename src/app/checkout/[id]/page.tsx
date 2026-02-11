@@ -22,12 +22,13 @@ interface Listing {
   }
 }
 
-function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
+function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode, offerId }: {
   listing: Listing
   quantity: number
   clientSecret: string
   orderId: string
   demoMode: boolean
+  offerId?: string | null
 }) {
   const stripe = useStripe()
   const elements = useElements()
@@ -89,6 +90,14 @@ function CheckoutForm({ listing, quantity, clientSecret, orderId, demoMode }: {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {offerId && (
+        <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
+          <span className="text-sm text-purple-800 font-medium">
+            ✨ Special Offer Price
+          </span>
+        </div>
+      )}
+
       <div className="bg-gray-50 rounded-lg p-6">
         <h3 className="font-semibold text-gray-900 mb-4">Order Summary</h3>
         <div className="space-y-2 mb-4">
@@ -207,7 +216,8 @@ export default function CheckoutPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           listingId: listing.id,
-          quantity
+          quantity,
+          ...(offerId && { offerId })
         })
       })
 
