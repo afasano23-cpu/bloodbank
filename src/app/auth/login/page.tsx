@@ -11,6 +11,7 @@ function LoginForm() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [userType, setUserType] = useState<'hospital' | 'admin'>('hospital')
+  const [rememberMe, setRememberMe] = useState(false)
 
   const registered = searchParams.get('registered')
 

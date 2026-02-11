@@ -10,7 +10,8 @@ export const authOptions: NextAuthOptions = {
       name: 'Hospital',
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
+        rememberMe: { label: "Remember Me", type: "text" }
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -47,7 +48,8 @@ export const authOptions: NextAuthOptions = {
       name: 'Admin',
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
+        rememberMe: { label: "Remember Me", type: "text" }
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -81,10 +83,17 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id
         token.role = user.role
+      }
+      // Store rememberMe flag from credentials
+      if (account?.provider === 'hospital' || account?.provider === 'admin') {
+        const credentials = account as any
+        if (credentials.rememberMe !== undefined) {
+          token.rememberMe = credentials.rememberMe === 'true' || credentials.rememberMe === true
+        }
       }
       return token
     },
@@ -92,6 +101,13 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id
         session.user.role = token.role
+      }
+      // Set dynamic session maxAge based on rememberMe
+      const rememberMe = token.rememberMe as boolean
+      if (rememberMe) {
+        session.expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() // 30 days
+      } else {
+        session.expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() // 24 hours
       }
       return session
     }
