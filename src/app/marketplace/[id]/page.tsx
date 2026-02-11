@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { format } from 'date-fns'
+import MakeOfferModal from '@/components/MakeOfferModal'
 
 interface Listing {
   id: string
