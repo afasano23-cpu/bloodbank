@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client'
 
 export async function GET(req: NextRequest) {
   try {
@@ -18,7 +19,7 @@ export async function GET(req: NextRequest) {
     const maxPrice = searchParams.get('maxPrice')
     const sortBy = searchParams.get('sortBy') || 'createdAt'
 
-    const where: any = {
+    const where: Prisma.BloodListingWhereInput = {
       isActive: true,
       quantity: { gt: 0 },
       expirationDate: { gte: new Date() },
@@ -43,7 +44,7 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    let orderBy: any = {}
+    let orderBy: Prisma.BloodListingOrderByWithRelationInput = {}
     switch (sortBy) {
       case 'price_asc':
         orderBy = { pricePerUnit: 'asc' }
