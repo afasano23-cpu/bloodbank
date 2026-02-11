@@ -11,7 +11,8 @@ const listingSchema = z.object({
   pricePerUnit: z.number().positive('Price must be positive'),
   expirationDate: z.string().min(1, 'Expiration date is required'),
   storageConditions: z.string().min(1, 'Storage conditions are required'),
-  notes: z.string().optional()
+  notes: z.string().optional(),
+  isActive: z.boolean().optional()
 })
 
 // GET single listing
