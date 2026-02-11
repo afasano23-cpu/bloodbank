@@ -30,33 +30,38 @@ export default function Home() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
+          <div className="flex justify-center gap-4 mb-6 flex-wrap">
+            <span className="trust-badge">🔒 HIPAA Compliant</span>
+            <span className="trust-badge">✓ Verified Hospitals</span>
+            <span className="trust-badge">⚡ Fast Processing</span>
+          </div>
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Veterinary Blood Bank Marketplace
+            Life-Saving Blood Bank Network for Veterinary Care
           </h2>
           <p className="text-xl text-gray-900 max-w-3xl mx-auto mb-8">
             Connect veterinary hospitals for life-saving blood donations with secure self-pickup.
           </p>
           <Link
             href="/auth/register"
-            className="inline-block px-8 py-4 bg-blue-600 text-white text-lg rounded-lg hover:bg-blue-700 font-semibold shadow-lg"
+            className="inline-block px-8 py-4 bg-emerald-600 text-white text-lg rounded-lg hover:bg-emerald-700 font-semibold shadow-lg"
           >
             Get Started
           </Link>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mt-20">
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="medical-card">
             <div className="text-4xl mb-4">🏥</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              For Hospitals
+              Verified Network
             </h3>
             <p className="text-gray-900">
-              List your available blood inventory and purchase what you need
-              from verified veterinary hospitals.
+              All hospitals verified with license numbers. Join a trusted network
+              of veterinary professionals.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-md">
+          <div className="medical-card">
             <div className="text-4xl mb-4">🔒</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
               Secure Platform
@@ -67,14 +72,14 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-md">
-            <div className="text-4xl mb-4">✓</div>
+          <div className="medical-card">
+            <div className="text-4xl mb-4">⚡</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Verified Hospitals
+              Rapid Access
             </h3>
             <p className="text-gray-900">
-              All hospitals are verified with license numbers. Secure payments
-              through Stripe.
+              Instant inventory search with real-time availability. Get the blood
+              products you need when you need them.
             </p>
           </div>
         </div>
