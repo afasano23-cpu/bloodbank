@@ -84,13 +84,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-20 bg-white rounded-lg shadow-md p-12">
+        <div className="mt-20 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-md p-12">
           <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center">
             How It Works
           </h3>
           <div className="grid md:grid-cols-4 gap-6">
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-blue-600">
+              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
                 1
               </div>
               <h4 className="font-semibold mb-2">Register</h4>
@@ -99,7 +99,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-blue-600">
+              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
                 2
               </div>
               <h4 className="font-semibold mb-2">Browse</h4>
@@ -108,7 +108,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-blue-600">
+              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
                 3
               </div>
               <h4 className="font-semibold mb-2">Purchase</h4>
@@ -117,7 +117,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-blue-600">
+              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
                 4
               </div>
               <h4 className="font-semibold mb-2">Track</h4>
@@ -131,6 +131,11 @@ export default function Home() {
 
       <footer className="bg-gray-800 text-white py-8 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex justify-center gap-6 mb-4 text-sm flex-wrap">
+            <span>🔒 Secure & Encrypted</span>
+            <span>✓ Licensed Hospitals Only</span>
+            <span>🛡️ Platform Verified</span>
+          </div>
           <p>&copy; 2026 VetBlood Bank. All rights reserved.</p>
         </div>
       </footer>
