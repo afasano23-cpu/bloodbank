@@ -26,6 +26,7 @@ model Hospital {
   bloodListings      BloodListing[]
   purchaseOrders     Order[]        @relation("BuyerOrders")
   saleOrders         Order[]        @relation("SellerOrders")
+  buyerOffers        Offer[]        @relation("BuyerOffers")
 }
 
 model BloodListing {
@@ -44,6 +45,7 @@ model BloodListing {
 
   hospital           Hospital       @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
   orderItems         OrderItem[]
+  offers             Offer[]
 }
 
 model Order {
@@ -113,6 +115,29 @@ model Delivery {
 
   order              Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
   courier            Courier?       @relation(fields: [courierId], references: [id])
+}
+
+model Offer {
+  id                 String         @id @default(cuid())
+  listingId          String
+  buyerId            String
+  offeredPrice       Float          // Price per unit offered by buyer
+  quantity           Int            // Units buyer wants (can be partial)
+  message            String?        // Optional message from buyer
+  status             String         @default("Pending") // Pending, Accepted, Rejected, Expired, Cancelled
+  expiresAt          DateTime       // 24 hours from creation
+  acceptedAt         DateTime?
+  rejectedAt         DateTime?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  listing            BloodListing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  buyer              Hospital       @relation("BuyerOffers", fields: [buyerId], references: [id])
+
+  @@index([listingId])
+  @@index([buyerId])
+  @@index([status])
+  @@index([expiresAt])
 }
 
 model Admin {
