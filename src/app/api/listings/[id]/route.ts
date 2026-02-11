@@ -17,11 +17,12 @@ const listingSchema = z.object({
 // GET single listing
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const listing = await prisma.bloodListing.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         hospital: {
           select: {
@@ -50,9 +51,10 @@ export async function GET(
 // PUT update listing
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session || session.user.role !== 'hospital') {
@@ -60,7 +62,7 @@ export async function PUT(
     }
 
     const listing = await prisma.bloodListing.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!listing) {
@@ -75,7 +77,7 @@ export async function PUT(
     const validatedData = listingSchema.parse(body)
 
     const updatedListing = await prisma.bloodListing.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...validatedData,
         expirationDate: new Date(validatedData.expirationDate)
@@ -110,9 +112,10 @@ export async function PUT(
 // DELETE listing
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session || session.user.role !== 'hospital') {
@@ -120,7 +123,7 @@ export async function DELETE(
     }
 
     const listing = await prisma.bloodListing.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!listing) {
@@ -132,7 +135,7 @@ export async function DELETE(
     }
 
     await prisma.bloodListing.delete({
-      where: { id: params.id }
+      where: { id }
     })
 
     return NextResponse.json({ message: 'Listing deleted successfully' })
