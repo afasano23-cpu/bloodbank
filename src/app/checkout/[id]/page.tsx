@@ -293,6 +293,7 @@ export default function CheckoutPage() {
               clientSecret={clientSecret}
               orderId={orderId!}
               demoMode={true}
+              offerId={offerId}
             />
           ) : (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
@@ -302,6 +303,7 @@ export default function CheckoutPage() {
                 clientSecret={clientSecret}
                 orderId={orderId!}
                 demoMode={false}
+                offerId={offerId}
               />
             </Elements>
           )}
