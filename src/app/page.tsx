@@ -52,20 +52,20 @@ export default function Home() {
           </div>
 
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <div className="text-4xl mb-4">🚗</div>
+            <div className="text-4xl mb-4">🔒</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Fast Delivery
+              Secure Platform
             </h3>
             <p className="text-gray-900">
-              Choose between self-pickup or courier delivery with real-time
-              tracking for urgent needs.
+              HIPAA compliant with end-to-end encryption. Secure transactions
+              and data protection for all participants.
             </p>
           </div>
 
           <div className="bg-white p-8 rounded-lg shadow-md">
-            <div className="text-4xl mb-4">🔒</div>
+            <div className="text-4xl mb-4">✓</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
-              Secure & Verified
+              Verified Hospitals
             </h3>
             <p className="text-gray-900">
               All hospitals are verified with license numbers. Secure payments
@@ -103,7 +103,7 @@ export default function Home() {
               </div>
               <h4 className="font-semibold mb-2">Purchase</h4>
               <p className="text-sm text-gray-900">
-                Secure checkout with delivery options
+                Secure checkout with self-pickup coordination
               </p>
             </div>
             <div className="text-center">
@@ -112,7 +112,7 @@ export default function Home() {
               </div>
               <h4 className="font-semibold mb-2">Track</h4>
               <p className="text-sm text-gray-900">
-                Real-time order and delivery tracking
+                Monitor order status and pickup details
               </p>
             </div>
           </div>
