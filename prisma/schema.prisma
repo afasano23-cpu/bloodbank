@@ -9,3 +9,117 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Hospital {
+  id                 String         @id @default(cuid())
+  name               String
+  address            String
+  licenseNumber      String         @unique
+  email              String         @unique
+  phoneNumber        String
+  password           String
+  latitude           Float?
+  longitude          Float?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  bloodListings      BloodListing[]
+  purchaseOrders     Order[]        @relation("BuyerOrders")
+  saleOrders         Order[]        @relation("SellerOrders")
+}
+
+model BloodListing {
+  id                 String         @id @default(cuid())
+  hospitalId         String
+  animalType         String         // "Dog" or "Cat"
+  bloodType          String         // DEA types for dogs, A/B/AB for cats
+  quantity           Int
+  pricePerUnit       Float
+  expirationDate     DateTime
+  storageConditions  String
+  notes              String?
+  isActive           Boolean        @default(true)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  hospital           Hospital       @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  orderItems         OrderItem[]
+}
+
+model Order {
+  id                 String         @id @default(cuid())
+  buyerId            String
+  sellerId           String
+  subtotal           Float
+  serviceFee         Float          // 10% service fee
+  deliveryFee        Float          @default(0)
+  total              Float
+  status             String         @default("Pending") // Pending, Confirmed, In Transit, Delivered, Cancelled
+  deliveryMethod     String         // "Self-pickup" or "Courier"
+  paymentIntentId    String?        // Stripe payment intent ID
+  paymentStatus      String         @default("Pending") // Pending, Paid, Failed
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  buyer              Hospital       @relation("BuyerOrders", fields: [buyerId], references: [id])
+  seller             Hospital       @relation("SellerOrders", fields: [sellerId], references: [id])
+  items              OrderItem[]
+  delivery           Delivery?
+}
+
+model OrderItem {
+  id                 String         @id @default(cuid())
+  orderId            String
+  listingId          String
+  quantity           Int
+  pricePerUnit       Float
+
+  order              Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  listing            BloodListing   @relation(fields: [listingId], references: [id])
+}
+
+model Courier {
+  id                 String         @id @default(cuid())
+  name               String
+  email              String         @unique
+  phoneNumber        String
+  password           String
+  vehicleType        String?
+  licensePlate       String?
+  isOnline           Boolean        @default(false)
+  latitude           Float?
+  longitude          Float?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  deliveries         Delivery[]
+}
+
+model Delivery {
+  id                 String         @id @default(cuid())
+  orderId            String         @unique
+  courierId          String?
+  status             String         @default("Pending") // Pending, Driver Assigned, Picked Up, In Transit, Delivered
+  pickupAddress      String
+  deliveryAddress    String
+  distance           Float?         // in kilometers
+  estimatedTime      Int?           // in minutes
+  pickupPhoto        String?
+  deliveryPhoto      String?
+  pickupTime         DateTime?
+  deliveryTime       DateTime?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  order              Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  courier            Courier?       @relation(fields: [courierId], references: [id])
+}
+
+model Admin {
+  id                 String         @id @default(cuid())
+  email              String         @unique
+  password           String
+  name               String
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+}
