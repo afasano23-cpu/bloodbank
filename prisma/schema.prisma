@@ -18,6 +18,7 @@ model Hospital {
   email              String         @unique
   phoneNumber        String
   password           String
+  stripeAccountId    String?        @unique
   latitude           Float?
   longitude          Float?
   createdAt          DateTime       @default(now())

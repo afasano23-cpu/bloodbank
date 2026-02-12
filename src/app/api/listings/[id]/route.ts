@@ -29,7 +29,8 @@ export async function GET(
           select: {
             name: true,
             address: true,
-            phoneNumber: true
+            phoneNumber: true,
+            stripeAccountId: true
           }
         }
       }
@@ -39,7 +40,16 @@ export async function GET(
       return NextResponse.json({ error: 'Listing not found' }, { status: 404 })
     }
 
-    return NextResponse.json({ listing })
+    return NextResponse.json({
+      listing: {
+        ...listing,
+        hospital: {
+          ...listing.hospital,
+          stripeConnected: !!listing.hospital.stripeAccountId,
+          stripeAccountId: undefined
+        }
+      }
+    })
   } catch (error) {
     console.error('Error fetching listing:', error)
     return NextResponse.json(

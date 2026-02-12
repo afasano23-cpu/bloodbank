@@ -20,6 +20,7 @@ interface Listing {
     name: string
     address: string
     phoneNumber: string
+    stripeConnected?: boolean
   }
 }
 
@@ -203,6 +204,15 @@ export default function ListingDetailPage() {
                   Seller receives 90% (${(subtotal * 0.90).toFixed(2)})
                 </p>
               </div>
+
+              {listing.hospital.stripeConnected === false && (
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                  <p className="text-sm text-yellow-800">
+                    This seller has not yet connected their payment account. The purchase will still
+                    go through, but the seller payout may be delayed.
+                  </p>
+                </div>
+              )}
 
               <button
                 onClick={handlePurchase}

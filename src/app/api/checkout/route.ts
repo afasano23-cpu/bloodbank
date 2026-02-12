@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getStripe, isDemoMode } from '@/lib/stripe'
 import Stripe from 'stripe'
-
-const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 export async function POST(req: NextRequest) {
   try {
@@ -60,12 +59,9 @@ export async function POST(req: NextRequest) {
     let clientSecret = null
 
     // Only use Stripe if not in demo mode and keys are configured
-    if (!isDemoMode && process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY !== '') {
-      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-        apiVersion: '2026-01-28.clover'
-      })
-
-      const paymentIntent = await stripe.paymentIntents.create({
+    const stripe = getStripe()
+    if (stripe) {
+      const paymentIntentParams: Stripe.PaymentIntentCreateParams = {
         amount: Math.round(total * 100),
         currency: 'usd',
         metadata: {
@@ -75,7 +71,19 @@ export async function POST(req: NextRequest) {
           quantity: finalQuantity.toString(),
           ...(offerId && { offerId })
         }
-      })
+      }
+
+      // If seller has connected Stripe account, split the payment
+      const sellerStripeAccountId = listing.hospital.stripeAccountId
+      if (sellerStripeAccountId) {
+        const platformFee = Math.round((sellerFee + buyerFee) * 100)
+        paymentIntentParams.application_fee_amount = platformFee
+        paymentIntentParams.transfer_data = {
+          destination: sellerStripeAccountId
+        }
+      }
+
+      const paymentIntent = await stripe.paymentIntents.create(paymentIntentParams)
 
       paymentIntentId = paymentIntent.id
       clientSecret = paymentIntent.client_secret

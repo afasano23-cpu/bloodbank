@@ -3,14 +3,13 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { expireOldOffers } from '@/lib/offers'
+import { getStripe, isDemoMode } from '@/lib/stripe'
 import Stripe from 'stripe'
 import { z } from 'zod'
 
 const actionSchema = z.object({
   action: z.enum(['accept', 'reject'])
 })
-
-const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 // GET - Get single offer details
 export async function GET(
@@ -212,12 +211,15 @@ export async function PATCH(
       let clientSecret = null
 
       // 4. Create Stripe payment intent
-      if (!isDemoMode && process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY !== '') {
-        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-          apiVersion: '2026-01-28.clover'
+      const stripe = getStripe()
+      if (stripe) {
+        // Look up seller's Stripe Connect account
+        const seller = await prisma.hospital.findUnique({
+          where: { id: session.user.id },
+          select: { stripeAccountId: true }
         })
 
-        const paymentIntent = await stripe.paymentIntents.create({
+        const paymentIntentParams: Stripe.PaymentIntentCreateParams = {
           amount: Math.round(total * 100),
           currency: 'usd',
           metadata: {
@@ -227,7 +229,18 @@ export async function PATCH(
             sellerId: session.user.id,
             quantity: offer.quantity.toString()
           }
-        })
+        }
+
+        // If seller has connected Stripe account, split the payment
+        if (seller?.stripeAccountId) {
+          const platformFee = Math.round((sellerFee + buyerFee) * 100)
+          paymentIntentParams.application_fee_amount = platformFee
+          paymentIntentParams.transfer_data = {
+            destination: seller.stripeAccountId
+          }
+        }
+
+        const paymentIntent = await stripe.paymentIntents.create(paymentIntentParams)
 
         paymentIntentId = paymentIntent.id
         clientSecret = paymentIntent.client_secret
