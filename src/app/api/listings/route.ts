@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
+import { sendListingCreatedEmail } from '@/lib/email'
 
 const listingSchema = z.object({
   animalType: z.enum(['Dog', 'Cat']),
@@ -81,10 +82,21 @@ export async function POST(req: NextRequest) {
         hospital: {
           select: {
             name: true,
-            address: true
+            address: true,
+            email: true
           }
         }
       }
+    })
+
+    sendListingCreatedEmail({
+      hospitalEmail: listing.hospital.email,
+      hospitalName: listing.hospital.name,
+      animalType: listing.animalType,
+      bloodType: listing.bloodType,
+      quantity: listing.quantity,
+      pricePerUnit: listing.pricePerUnit,
+      expirationDate: listing.expirationDate.toISOString(),
     })
 
     return NextResponse.json({ listing }, { status: 201 })

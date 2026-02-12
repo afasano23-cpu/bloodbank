@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { expireOldOffers } from '@/lib/offers'
 import { z } from 'zod'
+import { sendNewOfferEmail } from '@/lib/email'
 
 const createOfferSchema = z.object({
   listingId: z.string().min(1, 'Listing ID is required'),
@@ -124,6 +125,18 @@ export async function POST(req: NextRequest) {
           }
         }
       }
+    })
+
+    // Fire-and-forget email to seller
+    sendNewOfferEmail({
+      sellerEmail: offer.listing.hospital.email,
+      sellerName: offer.listing.hospital.name,
+      buyerName: offer.buyer.name,
+      animalType: offer.listing.animalType,
+      bloodType: offer.listing.bloodType,
+      quantity: offer.quantity,
+      offeredPrice: offer.offeredPrice,
+      message: offer.message,
     })
 
     return NextResponse.json({ offer }, { status: 201 })

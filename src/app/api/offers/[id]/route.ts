@@ -6,6 +6,7 @@ import { expireOldOffers } from '@/lib/offers'
 import { getStripe, isDemoMode } from '@/lib/stripe'
 import Stripe from 'stripe'
 import { z } from 'zod'
+import { sendOfferAcceptedEmail, sendOfferRejectedEmail } from '@/lib/email'
 
 const actionSchema = z.object({
   action: z.enum(['accept', 'reject'])
@@ -100,12 +101,20 @@ export async function PATCH(
     const body = await req.json()
     const { action } = actionSchema.parse(body)
 
-    // Fetch offer with listing
+    // Fetch offer with listing, seller, and buyer details
     const offer = await prisma.offer.findUnique({
       where: { id },
       include: {
-        listing: true,
-        buyer: true
+        listing: {
+          include: {
+            hospital: {
+              select: { id: true, name: true, email: true }
+            }
+          }
+        },
+        buyer: {
+          select: { id: true, name: true, email: true }
+        }
       }
     })
 
@@ -160,6 +169,15 @@ export async function PATCH(
           status: 'Rejected',
           rejectedAt: new Date()
         }
+      })
+
+      sendOfferRejectedEmail({
+        buyerEmail: offer.buyer.email,
+        buyerName: offer.buyer.name,
+        sellerName: offer.listing.hospital.name,
+        animalType: offer.listing.animalType,
+        bloodType: offer.listing.bloodType,
+        quantity: offer.quantity,
       })
 
       return NextResponse.json({
@@ -277,6 +295,17 @@ export async function PATCH(
         offerId: acceptedOffer.id,
         demoMode: isDemoMode
       }
+    })
+
+    sendOfferAcceptedEmail({
+      buyerEmail: offer.buyer.email,
+      buyerName: offer.buyer.name,
+      sellerName: offer.listing.hospital.name,
+      animalType: offer.listing.animalType,
+      bloodType: offer.listing.bloodType,
+      quantity: offer.quantity,
+      offeredPrice: offer.offeredPrice,
+      orderId: result.orderId,
     })
 
     return NextResponse.json(result)
