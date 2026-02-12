@@ -105,8 +105,8 @@ export default function ListingDetailPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
             <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">
               {listing.animalType}
             </span>
@@ -115,7 +115,7 @@ export default function ListingDetailPage() {
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
             <div>
               <h3 className="text-lg font-semibold text-gray-800 mb-4">Product Details</h3>
               <div className="space-y-3">
@@ -171,7 +171,7 @@ export default function ListingDetailPage() {
           <div className="border-t pt-8">
             <h3 className="text-lg font-semibold text-gray-800 mb-4">Purchase</h3>
 
-            <div className="bg-gray-50 rounded-lg p-6">
+            <div className="bg-gray-50 rounded-lg p-4 sm:p-6">
               <div className="mb-6">
                 <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-2">
                   Quantity
@@ -216,14 +216,14 @@ export default function ListingDetailPage() {
 
               <button
                 onClick={handlePurchase}
-                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 font-medium text-lg"
+                className="w-full bg-blue-600 text-white py-3 px-4 sm:px-6 rounded-md hover:bg-blue-700 font-medium text-base sm:text-lg"
               >
                 Proceed to Checkout
               </button>
 
               <button
                 onClick={() => setShowOfferModal(true)}
-                className="w-full mt-3 bg-purple-600 text-white py-3 px-6 rounded-md hover:bg-purple-700 font-medium text-lg"
+                className="w-full mt-3 bg-purple-600 text-white py-3 px-4 sm:px-6 rounded-md hover:bg-purple-700 font-medium text-base sm:text-lg"
               >
                 💬 Make an Offer
               </button>

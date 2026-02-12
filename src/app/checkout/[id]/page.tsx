@@ -266,8 +266,8 @@ export default function CheckoutPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Checkout</h2>
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Checkout</h2>
 
           {!clientSecret ? (
             <>

@@ -34,9 +34,9 @@ export default function NotificationsPage() {
       </nav>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Notifications</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Notifications</h2>
 
-        <div className="bg-white rounded-lg shadow-md p-12 text-center">
+        <div className="bg-white rounded-lg shadow-md p-6 sm:p-12 text-center">
           <div className="text-6xl mb-4">🔔</div>
           <p className="text-gray-900 mb-4">No new notifications</p>
           <p className="text-sm text-gray-700">

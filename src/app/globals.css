@@ -32,22 +32,35 @@ body {
 .trust-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.375rem 0.75rem;
   background-color: var(--medical-green-light);
   color: var(--medical-gray-dark);
   border-radius: 9999px;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .trust-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
 }
 
 /* Medical Card Styling */
 .medical-card {
   background: white;
   border-left: 4px solid var(--medical-green-primary);
-  padding: 2rem;
+  padding: 1.25rem;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
+}
+
+@media (min-width: 640px) {
+  .medical-card {
+    padding: 2rem;
+  }
 }
 
 .medical-card:hover {

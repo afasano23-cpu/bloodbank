@@ -76,10 +76,10 @@ export default function PurchasesPage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">My Purchases</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">My Purchases</h2>
 
         {orders.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="bg-white rounded-lg shadow-md p-6 sm:p-12 text-center">
             <p className="text-gray-900 mb-4">You haven&apos;t made any purchases yet.</p>
             <Link
               href="/marketplace"
@@ -93,9 +93,9 @@ export default function PurchasesPage() {
             {orders.map((order) => (
               <div
                 key={order.id}
-                className="bg-white rounded-lg shadow-md p-6"
+                className="bg-white rounded-lg shadow-md p-4 sm:p-6"
               >
-                <div className="flex justify-between items-start mb-4">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-4">
                   <div>
                     <div className="text-sm text-gray-900 mb-1">
                       Order placed {format(new Date(order.createdAt), 'MMM dd, yyyy')}

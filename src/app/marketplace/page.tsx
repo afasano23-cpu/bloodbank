@@ -90,12 +90,12 @@ export default function MarketplacePage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Blood Marketplace</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Blood Marketplace</h2>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Search & Filter</h3>
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-4">Search & Filter</h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Animal Type
@@ -181,16 +181,16 @@ export default function MarketplacePage() {
             <div className="text-xl">Loading listings...</div>
           </div>
         ) : listings.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="bg-white rounded-lg shadow-md p-6 sm:p-12 text-center">
             <p className="text-gray-900">No listings found matching your criteria.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {listings.map((listing) => (
               <Link
                 key={listing.id}
                 href={`/marketplace/${listing.id}`}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">

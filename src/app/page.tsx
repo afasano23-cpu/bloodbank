@@ -28,28 +28,28 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-16">
-          <div className="flex justify-center gap-4 mb-6 flex-wrap">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+        <div className="text-center mb-10 sm:mb-16">
+          <div className="flex justify-center gap-2 sm:gap-4 mb-6 flex-wrap">
             <span className="trust-badge">🔒 HIPAA Compliant</span>
             <span className="trust-badge">✓ Verified Hospitals</span>
             <span className="trust-badge">⚡ Fast Processing</span>
           </div>
-          <h2 className="text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
             Life-Saving Blood Bank Network for Veterinary Care
           </h2>
-          <p className="text-xl text-gray-900 max-w-3xl mx-auto mb-8">
+          <p className="text-base sm:text-xl text-gray-900 max-w-3xl mx-auto mb-6 sm:mb-8">
             Connect veterinary hospitals for life-saving blood donations with secure self-pickup.
           </p>
           <Link
             href="/auth/register"
-            className="inline-block px-8 py-4 bg-emerald-600 text-white text-lg rounded-lg hover:bg-emerald-700 font-semibold shadow-lg"
+            className="inline-block px-6 py-3 sm:px-8 sm:py-4 bg-emerald-600 text-white text-base sm:text-lg rounded-lg hover:bg-emerald-700 font-semibold shadow-lg"
           >
             Get Started
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mt-20">
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-20">
           <div className="medical-card">
             <div className="text-4xl mb-4">🏥</div>
             <h3 className="text-xl font-semibold text-gray-800 mb-3">
@@ -84,13 +84,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-20 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-md p-12">
-          <h3 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+        <div className="mt-10 sm:mt-20 bg-gradient-to-br from-blue-50 to-white rounded-lg shadow-md p-6 sm:p-12">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
             How It Works
           </h3>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             <div className="text-center">
-              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
+              <div className="bg-emerald-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-xl sm:text-2xl font-bold text-emerald-600">
                 1
               </div>
               <h4 className="font-semibold mb-2">Register</h4>
@@ -99,7 +99,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
+              <div className="bg-emerald-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-xl sm:text-2xl font-bold text-emerald-600">
                 2
               </div>
               <h4 className="font-semibold mb-2">Browse</h4>
@@ -108,7 +108,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
+              <div className="bg-emerald-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-xl sm:text-2xl font-bold text-emerald-600">
                 3
               </div>
               <h4 className="font-semibold mb-2">Purchase</h4>
@@ -117,7 +117,7 @@ export default function Home() {
               </p>
             </div>
             <div className="text-center">
-              <div className="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-emerald-600">
+              <div className="bg-emerald-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 text-xl sm:text-2xl font-bold text-emerald-600">
                 4
               </div>
               <h4 className="font-semibold mb-2">Track</h4>
@@ -131,7 +131,7 @@ export default function Home() {
 
       <footer className="bg-gray-800 text-white py-8 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center gap-6 mb-4 text-sm flex-wrap">
+          <div className="flex justify-center gap-3 sm:gap-6 mb-4 text-xs sm:text-sm flex-wrap">
             <span>🔒 Secure & Encrypted</span>
             <span>✓ Licensed Hospitals Only</span>
             <span>🛡️ Platform Verified</span>

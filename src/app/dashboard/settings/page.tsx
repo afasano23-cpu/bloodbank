@@ -95,7 +95,7 @@ function SettingsContent() {
           </Link>
         </div>
 
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Account Settings</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Account Settings</h2>
 
         {message && (
           <div className="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">

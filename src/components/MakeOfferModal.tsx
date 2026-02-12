@@ -104,11 +104,11 @@ export default function MakeOfferModal({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Header */}
-          <div className="flex justify-between items-start mb-6">
+          <div className="flex justify-between items-start mb-4 sm:mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800">Make an Offer</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Make an Offer</h2>
               <p className="text-sm text-gray-600 mt-1">
                 {listing.animalType} Blood • Type {listing.bloodType}
               </p>

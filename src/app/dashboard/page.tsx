@@ -43,104 +43,104 @@ export default function DashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             Hospital Dashboard
           </h2>
           <p className="text-gray-900">Welcome back, {session.user.name}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
           <Link
             href="/dashboard/listings"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">📋</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📋</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               My Listings
             </h3>
-            <p className="text-gray-900">Manage your blood inventory</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">Manage your blood inventory</p>
           </Link>
 
           <Link
             href="/dashboard/purchases"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">🛒</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🛒</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               My Purchases
             </h3>
-            <p className="text-gray-900">View your orders and track pickup details</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">View your orders and track pickup details</p>
           </Link>
 
           <Link
             href="/dashboard/sales"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">💰</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">💰</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               My Sales
             </h3>
-            <p className="text-gray-900">Manage incoming orders</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">Manage incoming orders</p>
           </Link>
 
           <Link
             href="/marketplace"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🔍</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               Marketplace
             </h3>
-            <p className="text-gray-900">Browse available blood products</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">Browse available blood products</p>
           </Link>
 
           <Link
             href="/dashboard/offers"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">💬</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">💬</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               My Offers
             </h3>
-            <p className="text-gray-900">View offers you've made on listings</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">View offers you've made on listings</p>
           </Link>
 
           <Link
             href="/dashboard/offers/received"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">📬</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📬</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               Offers Received
             </h3>
-            <p className="text-gray-900">Review and respond to buyer offers</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">Review and respond to buyer offers</p>
           </Link>
 
           <Link
             href="/dashboard/notifications"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">🔔</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🔔</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               Notifications
             </h3>
-            <p className="text-gray-900">View updates and messages</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">View updates and messages</p>
           </Link>
 
           <Link
             href="/dashboard/settings"
-            className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
           >
-            <div className="text-4xl mb-3">⚙️</div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚙️</div>
+            <h3 className="text-base sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
               Settings
             </h3>
-            <p className="text-gray-900">Update your profile and preferences</p>
+            <p className="text-sm sm:text-base text-gray-900 hidden sm:block">Update your profile and preferences</p>
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
             Quick Actions
           </h3>
           <div className="space-y-3">

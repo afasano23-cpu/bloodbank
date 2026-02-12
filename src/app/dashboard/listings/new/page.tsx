@@ -73,8 +73,8 @@ export default function NewListingPage() {
           </Link>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">
             Add New Blood Listing
           </h2>
 
@@ -205,7 +205,13 @@ export default function NewListingPage() {
               />
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
+              <Link
+                href="/dashboard/listings"
+                className="px-6 py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 font-medium text-center"
+              >
+                Cancel
+              </Link>
               <button
                 type="submit"
                 disabled={loading}
@@ -213,12 +219,6 @@ export default function NewListingPage() {
               >
                 {loading ? 'Creating...' : 'Create Listing'}
               </button>
-              <Link
-                href="/dashboard/listings"
-                className="px-6 py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 font-medium"
-              >
-                Cancel
-              </Link>
             </div>
           </form>
         </div>

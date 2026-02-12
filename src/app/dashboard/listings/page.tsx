@@ -85,18 +85,18 @@ export default function ListingsPage() {
       </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-3xl font-bold text-gray-800">My Blood Listings</h2>
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">My Blood Listings</h2>
           <Link
             href="/dashboard/listings/new"
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
+            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium text-center text-sm sm:text-base"
           >
             + Add New Listing
           </Link>
         </div>
 
         {listings.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="bg-white rounded-lg shadow-md p-6 sm:p-12 text-center">
             <p className="text-gray-900 mb-4">You haven&apos;t created any listings yet.</p>
             <Link
               href="/dashboard/listings/new"
@@ -110,11 +110,11 @@ export default function ListingsPage() {
             {listings.map((listing) => (
               <div
                 key={listing.id}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow"
               >
-                <div className="flex justify-between items-start">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-3 flex-wrap">
                       <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
                         {listing.animalType}
                       </span>
@@ -169,16 +169,16 @@ export default function ListingsPage() {
                     )}
                   </div>
 
-                  <div className="flex gap-2 ml-4">
+                  <div className="flex gap-2">
                     <Link
                       href={`/dashboard/listings/${listing.id}/edit`}
-                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
+                      className="px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 text-sm"
                     >
                       Edit
                     </Link>
                     <button
                       onClick={() => handleDelete(listing.id)}
-                      className="px-4 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200"
+                      className="px-3 sm:px-4 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 text-sm"
                     >
                       Delete
                     </button>

@@ -28,12 +28,12 @@ export default function OfferCard({
   const timeRemaining = offer.status === 'Pending' ? getTimeRemaining(offer.expiresAt) : null
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
-            <h3 className="text-lg font-bold text-gray-800">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+            <h3 className="text-base sm:text-lg font-bold text-gray-800">
               {offer.listing?.animalType} Blood • Type {offer.listing?.bloodType}
             </h3>
             <OfferStatusBadge status={offer.status} />
@@ -54,21 +54,21 @@ export default function OfferCard({
       </div>
 
       {/* Offer Details */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
         <div>
           <p className="text-xs text-gray-500">Quantity</p>
-          <p className="text-lg font-semibold text-gray-800">{offer.quantity} units</p>
+          <p className="text-base sm:text-lg font-semibold text-gray-800">{offer.quantity} units</p>
         </div>
         <div>
           <p className="text-xs text-gray-500">Offered Price</p>
-          <p className="text-lg font-semibold text-purple-600">
+          <p className="text-base sm:text-lg font-semibold text-purple-600">
             ${offer.offeredPrice.toFixed(2)}/unit
           </p>
         </div>
       </div>
 
       {/* Price Comparison */}
-      <div className="bg-gray-50 rounded-lg p-3 mb-4">
+      <div className="bg-gray-50 rounded-lg p-2.5 sm:p-3 mb-4">
         <div className="flex justify-between items-center text-sm mb-2">
           <span className="text-gray-600">Listing Price:</span>
           <span className="font-medium">${listingPrice.toFixed(2)}/unit</span>
