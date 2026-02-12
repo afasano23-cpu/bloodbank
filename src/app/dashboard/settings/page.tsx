@@ -129,7 +129,10 @@ function SettingsContent() {
               />
             </div>
             <p className="text-sm text-gray-900">
-              To update your profile information, please contact support.
+              To update your profile information, please{' '}
+              <Link href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
+                contact support
+              </Link>.
             </p>
           </div>
         </div>

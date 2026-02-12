@@ -136,6 +136,11 @@ export default function Home() {
             <span>✓ Licensed Hospitals Only</span>
             <span>🛡️ Platform Verified</span>
           </div>
+          <p className="mb-2">
+            <Link href="/contact" className="text-gray-300 hover:text-white underline">
+              Contact Support
+            </Link>
+          </p>
           <p>&copy; 2026 VetBlood Bank. All rights reserved.</p>
         </div>
       </footer>

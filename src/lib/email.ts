@@ -215,3 +215,37 @@ export async function sendDailyDigestEmail(params: {
   `)
   await sendEmail(params.hospitalEmail, `${params.listings.length} blood products available near you`, html)
 }
+
+export async function sendContactFormEmail(params: {
+  senderName: string
+  senderEmail: string
+  subject: string
+  message: string
+  hospitalName?: string
+}) {
+  const supportEmail = process.env.SUPPORT_EMAIL || 'support@bloodbankvet.com'
+  const html = emailWrapper('New Support Request', `
+    <p style="color:#374151;"><strong>From:</strong> ${params.senderName} (${params.senderEmail})</p>
+    ${params.hospitalName ? `<p style="color:#374151;"><strong>Hospital:</strong> ${params.hospitalName}</p>` : ''}
+    <p style="color:#374151;"><strong>Subject:</strong> ${params.subject}</p>
+    <div style="background:#f3f4f6;border-radius:8px;padding:16px;margin:16px 0;">
+      <p style="color:#374151;white-space:pre-wrap;">${params.message}</p>
+    </div>
+    <p style="color:#6b7280;font-size:12px;">Reply directly to this email to respond to the sender.</p>
+  `)
+  if (!resend) {
+    console.log(`[Email Skipped] Contact form from: ${params.senderEmail}`)
+    return
+  }
+  try {
+    await resend.emails.send({
+      from: FROM_EMAIL,
+      to: supportEmail,
+      replyTo: params.senderEmail,
+      subject: `[Support] ${params.subject}`,
+      html,
+    })
+  } catch (error) {
+    console.error('[Email Error] Contact form:', error)
+  }
+}
