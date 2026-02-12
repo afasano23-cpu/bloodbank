@@ -18,6 +18,8 @@ function SettingsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [message, setMessage] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [passwordLoading, setPasswordLoading] = useState(false)
   const [stripeStatus, setStripeStatus] = useState<StripeStatus | null>(null)
   const [stripeLoading, setStripeLoading] = useState(true)
   const [connectingStripe, setConnectingStripe] = useState(false)
@@ -186,13 +188,64 @@ function SettingsContent() {
 
         <div className="bg-white rounded-lg shadow-md p-6">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">Change Password</h3>
-          <form className="space-y-4">
+
+          {passwordError && (
+            <div className={`mb-4 p-3 rounded ${passwordError.includes('successfully') ? 'bg-green-100 border border-green-400 text-green-700' : 'bg-red-100 border border-red-400 text-red-700'}`}>
+              {passwordError}
+            </div>
+          )}
+
+          <form className="space-y-4" onSubmit={async (e) => {
+            e.preventDefault()
+            setPasswordError('')
+            setPasswordLoading(true)
+
+            const formData = new FormData(e.currentTarget)
+            const currentPassword = formData.get('currentPassword') as string
+            const newPassword = formData.get('newPassword') as string
+            const confirmPassword = formData.get('confirmPassword') as string
+
+            if (newPassword !== confirmPassword) {
+              setPasswordError('New passwords do not match')
+              setPasswordLoading(false)
+              return
+            }
+
+            if (newPassword.length < 6) {
+              setPasswordError('New password must be at least 6 characters')
+              setPasswordLoading(false)
+              return
+            }
+
+            try {
+              const res = await fetch('/api/account/password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ currentPassword, newPassword })
+              })
+
+              const data = await res.json()
+
+              if (!res.ok) {
+                setPasswordError(data.error || 'Failed to update password')
+              } else {
+                setPasswordError('Password updated successfully!')
+                ;(e.target as HTMLFormElement).reset()
+              }
+            } catch {
+              setPasswordError('An error occurred. Please try again.')
+            } finally {
+              setPasswordLoading(false)
+            }
+          }}>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Current Password
               </label>
               <input
                 type="password"
+                name="currentPassword"
+                required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
               />
             </div>
@@ -202,6 +255,9 @@ function SettingsContent() {
               </label>
               <input
                 type="password"
+                name="newPassword"
+                required
+                minLength={6}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
               />
             </div>
@@ -211,14 +267,18 @@ function SettingsContent() {
               </label>
               <input
                 type="password"
+                name="confirmPassword"
+                required
+                minLength={6}
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-medium"
+              disabled={passwordLoading}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 font-medium disabled:opacity-50"
             >
-              Update Password
+              {passwordLoading ? 'Updating...' : 'Update Password'}
             </button>
           </form>
         </div>
