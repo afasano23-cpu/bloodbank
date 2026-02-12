@@ -15,9 +15,15 @@ export default function RegisterPage() {
     setLoading(true)
 
     const formData = new FormData(e.currentTarget)
+    const street = formData.get('address') as string
+    const city = formData.get('city') as string
+    const state = formData.get('state') as string
+    const zip = formData.get('zip') as string
+    const fullAddress = `${street}, ${city}, ${state} ${zip}`
+
     const data = {
       name: formData.get('name') as string,
-      address: formData.get('address') as string,
+      address: fullAddress,
       email: formData.get('email') as string,
       phoneNumber: formData.get('phoneNumber') as string,
       password: formData.get('password') as string
@@ -75,15 +81,59 @@ export default function RegisterPage() {
 
           <div>
             <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
-              Address
+              Street Address
             </label>
             <input
               type="text"
               id="address"
               name="address"
               required
+              placeholder="123 Main St"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
             />
+          </div>
+
+          <div className="grid grid-cols-6 gap-3">
+            <div className="col-span-3">
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                City
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+              />
+            </div>
+            <div className="col-span-1">
+              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
+                State
+              </label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                required
+                maxLength={2}
+                placeholder="NY"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+              />
+            </div>
+            <div className="col-span-2">
+              <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-1">
+                Zip
+              </label>
+              <input
+                type="text"
+                id="zip"
+                name="zip"
+                required
+                maxLength={10}
+                placeholder="10001"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+              />
+            </div>
           </div>
 
           <div>

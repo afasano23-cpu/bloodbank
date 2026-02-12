@@ -11,6 +11,29 @@ const registerSchema = z.object({
   password: z.string().min(6, 'Password must be at least 6 characters')
 })
 
+async function geocodeAddress(address: string): Promise<{ latitude: number; longitude: number } | null> {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?${new URLSearchParams({
+        q: address,
+        format: 'json',
+        limit: '1',
+      })}`,
+      { headers: { 'User-Agent': 'VetBloodBank/1.0' } }
+    )
+    const results = await res.json()
+    if (results.length > 0) {
+      return {
+        latitude: parseFloat(results[0].lat),
+        longitude: parseFloat(results[0].lon),
+      }
+    }
+    return null
+  } catch {
+    return null
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
@@ -32,11 +55,15 @@ export async function POST(req: NextRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(validatedData.password, 10)
 
+    // Geocode the address to get lat/lng for proximity features
+    const coords = await geocodeAddress(validatedData.address)
+
     // Create hospital
     const hospital = await prisma.hospital.create({
       data: {
         ...validatedData,
-        password: hashedPassword
+        password: hashedPassword,
+        ...(coords && { latitude: coords.latitude, longitude: coords.longitude }),
       },
       select: {
         id: true,
