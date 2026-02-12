@@ -15,9 +15,10 @@ const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 // GET - Get single offer details
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session || session.user.role !== 'hospital') {
@@ -27,7 +28,7 @@ export async function GET(
     await expireOldOffers()
 
     const offer = await prisma.offer.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         listing: {
           include: {
@@ -85,9 +86,10 @@ export async function GET(
 // PATCH - Accept or reject offer
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session || session.user.role !== 'hospital') {
@@ -101,7 +103,7 @@ export async function PATCH(
 
     // Fetch offer with listing
     const offer = await prisma.offer.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         listing: true,
         buyer: true
@@ -134,7 +136,7 @@ export async function PATCH(
     // Verify offer not expired
     if (new Date(offer.expiresAt) < new Date()) {
       await prisma.offer.update({
-        where: { id: params.id },
+        where: { id: id },
         data: { status: 'Expired' }
       })
       return NextResponse.json(
@@ -154,7 +156,7 @@ export async function PATCH(
     // Handle rejection
     if (action === 'reject') {
       const rejectedOffer = await prisma.offer.update({
-        where: { id: params.id },
+        where: { id: id },
         data: {
           status: 'Rejected',
           rejectedAt: new Date()
@@ -180,7 +182,7 @@ export async function PATCH(
 
       // 1. Update this offer to Accepted
       const acceptedOffer = await tx.offer.update({
-        where: { id: params.id },
+        where: { id: id },
         data: {
           status: 'Accepted',
           acceptedAt: new Date()
@@ -191,7 +193,7 @@ export async function PATCH(
       await tx.offer.updateMany({
         where: {
           listingId: offer.listingId,
-          id: { not: params.id },
+          id: { not: id },
           status: 'Pending'
         },
         data: {

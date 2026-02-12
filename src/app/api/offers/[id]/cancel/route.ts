@@ -6,9 +6,10 @@ import { prisma } from '@/lib/prisma'
 // POST - Buyer cancels their pending offer
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const session = await getServerSession(authOptions)
 
     if (!session || session.user.role !== 'hospital') {
@@ -17,7 +18,7 @@ export async function POST(
 
     // Fetch offer
     const offer = await prisma.offer.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!offer) {
@@ -45,7 +46,7 @@ export async function POST(
 
     // Cancel the offer
     const cancelledOffer = await prisma.offer.update({
-      where: { id: params.id },
+      where: { id },
       data: { status: 'Cancelled' }
     })
 
