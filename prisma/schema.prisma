@@ -21,6 +21,8 @@ model Hospital {
   stripeAccountId    String?        @unique
   latitude           Float?
   longitude          Float?
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
 
@@ -146,6 +148,8 @@ model Admin {
   email              String         @unique
   password           String
   name               String
+  passwordResetToken   String?
+  passwordResetExpires DateTime?
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
 }

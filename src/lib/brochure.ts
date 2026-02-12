@@ -1,0 +1,150 @@
+export function generateBrochureHtml(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:Arial,Helvetica,sans-serif;">
+<div style="max-width:640px;margin:0 auto;background:#ffffff;">
+
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#1e3a8a,#2563eb);padding:40px 32px;text-align:center;">
+    <h1 style="margin:0;color:#ffffff;font-size:32px;letter-spacing:-0.5px;">VetBlood Bank</h1>
+    <p style="margin:8px 0 0;color:#bfdbfe;font-size:16px;">The Veterinary Blood Product Marketplace</p>
+  </div>
+
+  <!-- Hero -->
+  <div style="padding:32px;text-align:center;background:#eff6ff;border-bottom:1px solid #dbeafe;">
+    <h2 style="margin:0 0 12px;color:#1e3a8a;font-size:24px;">Connecting Hospitals. Saving Animal Lives.</h2>
+    <p style="margin:0;color:#374151;font-size:15px;line-height:1.6;max-width:480px;display:inline-block;">
+      VetBlood Bank is a secure online marketplace where veterinary hospitals can buy and sell blood products quickly, reliably, and affordably.
+    </p>
+  </div>
+
+  <!-- Features Grid -->
+  <div style="padding:32px;">
+    <h3 style="margin:0 0 24px;color:#1f2937;font-size:20px;text-align:center;">Why Hospitals Choose VetBlood Bank</h3>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+      <tr>
+        <td width="50%" style="padding:0 8px 16px 0;vertical-align:top;">
+          <div style="background:#f0fdf4;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">🔍</div>
+            <h4 style="margin:0 0 6px;color:#065f46;font-size:15px;">Find Blood Fast</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">Search by animal type, blood type, and location. Browse real-time inventory from hospitals near you.</p>
+          </div>
+        </td>
+        <td width="50%" style="padding:0 0 16px 8px;vertical-align:top;">
+          <div style="background:#eff6ff;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">💰</div>
+            <h4 style="margin:0 0 6px;color:#1e40af;font-size:15px;">Competitive Pricing</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">List your surplus at your price or make offers on listings. Transparent pricing with a small service fee.</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="padding:0 8px 16px 0;vertical-align:top;">
+          <div style="background:#fefce8;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">🔒</div>
+            <h4 style="margin:0 0 6px;color:#854d0e;font-size:15px;">Secure Payments</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">Stripe-powered payments protect both buyers and sellers. Get paid directly to your bank account.</p>
+          </div>
+        </td>
+        <td width="50%" style="padding:0 0 16px 8px;vertical-align:top;">
+          <div style="background:#fdf2f8;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">🚚</div>
+            <h4 style="margin:0 0 6px;color:#9d174d;font-size:15px;">Flexible Delivery</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">Choose self-pickup or courier delivery with real-time tracking and temperature-controlled transport.</p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width="50%" style="padding:0 8px 0 0;vertical-align:top;">
+          <div style="background:#f5f3ff;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">📋</div>
+            <h4 style="margin:0 0 6px;color:#5b21b6;font-size:15px;">Easy Inventory</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">List individual products or bulk upload via CSV. Manage everything from your hospital dashboard.</p>
+          </div>
+        </td>
+        <td width="50%" style="padding:0 0 0 8px;vertical-align:top;">
+          <div style="background:#ecfdf5;border-radius:8px;padding:20px;">
+            <div style="font-size:28px;margin-bottom:8px;">📊</div>
+            <h4 style="margin:0 0 6px;color:#065f46;font-size:15px;">Daily Alerts</h4>
+            <p style="margin:0;color:#374151;font-size:13px;line-height:1.5;">Receive daily email digests of available blood products near your hospital. Never miss a listing.</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- How It Works -->
+  <div style="padding:32px;background:#f9fafb;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;">
+    <h3 style="margin:0 0 24px;color:#1f2937;font-size:20px;text-align:center;">How It Works</h3>
+
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+      <tr>
+        <td style="text-align:center;padding:0 8px;vertical-align:top;" width="33%">
+          <div style="background:#2563eb;color:white;width:36px;height:36px;border-radius:50%;display:inline-block;line-height:36px;font-weight:bold;font-size:16px;">1</div>
+          <h4 style="margin:10px 0 4px;color:#1f2937;font-size:14px;">Register</h4>
+          <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.5;">Create your free hospital account in under 2 minutes.</p>
+        </td>
+        <td style="text-align:center;padding:0 8px;vertical-align:top;" width="33%">
+          <div style="background:#2563eb;color:white;width:36px;height:36px;border-radius:50%;display:inline-block;line-height:36px;font-weight:bold;font-size:16px;">2</div>
+          <h4 style="margin:10px 0 4px;color:#1f2937;font-size:14px;">List or Browse</h4>
+          <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.5;">Post your surplus inventory or find what you need.</p>
+        </td>
+        <td style="text-align:center;padding:0 8px;vertical-align:top;" width="33%">
+          <div style="background:#2563eb;color:white;width:36px;height:36px;border-radius:50%;display:inline-block;line-height:36px;font-weight:bold;font-size:16px;">3</div>
+          <h4 style="margin:10px 0 4px;color:#1f2937;font-size:14px;">Transact</h4>
+          <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.5;">Buy, sell, or negotiate offers with secure checkout.</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Blood Types Supported -->
+  <div style="padding:32px;">
+    <h3 style="margin:0 0 16px;color:#1f2937;font-size:20px;text-align:center;">Blood Types Supported</h3>
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+      <tr>
+        <td width="50%" style="padding:0 8px 0 0;vertical-align:top;">
+          <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px;">
+            <h4 style="margin:0 0 8px;color:#1f2937;font-size:14px;">🐕 Canine</h4>
+            <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.8;">
+              DEA 1.1+ &bull; DEA 1.1- &bull; DEA 1.2+<br/>
+              DEA 1.2- &bull; DEA 3 &bull; DEA 4<br/>
+              DEA 5 &bull; DEA 7
+            </p>
+          </div>
+        </td>
+        <td width="50%" style="padding:0 0 0 8px;vertical-align:top;">
+          <div style="border:1px solid #e5e7eb;border-radius:8px;padding:16px;">
+            <h4 style="margin:0 0 8px;color:#1f2937;font-size:14px;">🐈 Feline</h4>
+            <p style="margin:0;color:#6b7280;font-size:12px;line-height:1.8;">
+              Type A &bull; Type B &bull; Type AB
+            </p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- CTA -->
+  <div style="padding:32px;text-align:center;background:linear-gradient(135deg,#1e3a8a,#2563eb);">
+    <h3 style="margin:0 0 12px;color:#ffffff;font-size:22px;">Ready to Get Started?</h3>
+    <p style="margin:0 0 24px;color:#bfdbfe;font-size:14px;">Join veterinary hospitals already using VetBlood Bank.</p>
+    <a href="{{REGISTER_URL}}" style="display:inline-block;padding:14px 40px;background:#ffffff;color:#1e3a8a;text-decoration:none;border-radius:6px;font-weight:bold;font-size:16px;">
+      Register Your Hospital
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div style="padding:24px 32px;text-align:center;background:#1e293b;">
+    <p style="margin:0 0 8px;color:#94a3b8;font-size:13px;">VetBlood Bank - Trusted by Veterinary Hospitals</p>
+    <p style="margin:0;color:#64748b;font-size:11px;">
+      Questions? Contact us at support@bloodbankvet.com
+    </p>
+  </div>
+
+</div>
+</body>
+</html>`
+}

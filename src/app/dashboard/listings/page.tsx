@@ -87,12 +87,20 @@ export default function ListingsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">My Blood Listings</h2>
-          <Link
-            href="/dashboard/listings/new"
-            className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium text-center text-sm sm:text-base"
-          >
-            + Add New Listing
-          </Link>
+          <div className="flex gap-2">
+            <Link
+              href="/dashboard/listings/upload"
+              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-600 text-white rounded-md hover:bg-gray-700 font-medium text-center text-sm sm:text-base"
+            >
+              Upload CSV
+            </Link>
+            <Link
+              href="/dashboard/listings/new"
+              className="px-4 sm:px-6 py-2.5 sm:py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium text-center text-sm sm:text-base"
+            >
+              + Add New Listing
+            </Link>
+          </div>
         </div>
 
         {listings.length === 0 ? (

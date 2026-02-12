@@ -15,7 +15,9 @@ export async function GET(req: NextRequest) {
       totalOrders,
       totalRevenue,
       activeListings,
-      totalHospitals
+      totalHospitals,
+      totalOffers,
+      pendingOffers,
     ] = await Promise.all([
       prisma.order.count(),
       prisma.order.aggregate({
@@ -29,8 +31,33 @@ export async function GET(req: NextRequest) {
           quantity: { gt: 0 }
         }
       }),
-      prisma.hospital.count()
+      prisma.hospital.count(),
+      prisma.offer.count(),
+      prisma.offer.count({
+        where: { status: 'Pending' }
+      }),
     ])
+
+    // Revenue by month (last 6 months)
+    const sixMonthsAgo = new Date()
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
+
+    const monthlyOrders = await prisma.order.findMany({
+      where: {
+        createdAt: { gte: sixMonthsAgo },
+        paymentStatus: 'Paid',
+      },
+      select: {
+        serviceFee: true,
+        createdAt: true,
+      },
+    })
+
+    const revenueByMonth: Record<string, number> = {}
+    for (const order of monthlyOrders) {
+      const key = `${order.createdAt.getFullYear()}-${String(order.createdAt.getMonth() + 1).padStart(2, '0')}`
+      revenueByMonth[key] = (revenueByMonth[key] || 0) + order.serviceFee
+    }
 
     const recentOrders = await prisma.order.findMany({
       take: 10,
@@ -56,7 +83,10 @@ export async function GET(req: NextRequest) {
         totalOrders,
         totalRevenue: totalRevenue._sum.serviceFee || 0,
         activeListings,
-        totalHospitals
+        totalHospitals,
+        totalOffers,
+        pendingOffers,
+        revenueByMonth,
       },
       recentOrders
     })

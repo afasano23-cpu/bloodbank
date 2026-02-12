@@ -216,6 +216,25 @@ export async function sendDailyDigestEmail(params: {
   await sendEmail(params.hospitalEmail, `${params.listings.length} blood products available near you`, html)
 }
 
+export async function sendPasswordResetEmail(params: {
+  email: string
+  name: string
+  resetUrl: string
+}) {
+  const html = emailWrapper('Reset Your Password', `
+    <p style="color:#374151;">Hi ${params.name},</p>
+    <p style="color:#374151;">We received a request to reset your password. Click the button below to set a new password:</p>
+    <div style="text-align:center;margin:24px 0;">
+      <a href="${params.resetUrl}" style="display:inline-block;padding:12px 32px;background:#1e40af;color:white;text-decoration:none;border-radius:6px;font-weight:bold;">
+        Reset Password
+      </a>
+    </div>
+    <p style="color:#6b7280;font-size:14px;">This link expires in 1 hour. If you didn't request a password reset, you can safely ignore this email.</p>
+    <p style="color:#6b7280;font-size:12px;margin-top:16px;">If the button doesn't work, copy and paste this URL into your browser:<br/>${params.resetUrl}</p>
+  `)
+  await sendEmail(params.email, 'Reset your VetBlood Bank password', html)
+}
+
 export async function sendContactFormEmail(params: {
   senderName: string
   senderEmail: string
