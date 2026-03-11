@@ -48,6 +48,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cannot purchase your own listing' }, { status: 400 })
     }
 
+    // Block checkout if seller hasn't connected Stripe (prevents collecting payment without ability to pay seller)
+    const stripe = getStripe()
+    if (stripe && !listing.hospital.stripeAccountId) {
+      return NextResponse.json(
+        { error: 'This seller has not connected their Stripe account yet. Payment cannot be processed.' },
+        { status: 400 }
+      )
+    }
+
     // Calculate pricing with fees from both sides (10% each)
     const subtotal = pricePerUnit * finalQuantity
     const sellerFee = subtotal * 0.10  // 10% from seller (they receive 90%)
@@ -59,7 +68,6 @@ export async function POST(req: NextRequest) {
     let clientSecret = null
 
     // Only use Stripe if not in demo mode and keys are configured
-    const stripe = getStripe()
     if (stripe) {
       const paymentIntentParams: Stripe.PaymentIntentCreateParams = {
         amount: Math.round(total * 100),

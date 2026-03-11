@@ -21,6 +21,13 @@ export async function GET(req: NextRequest) {
       include: {
         buyer: { select: { name: true } },
         seller: { select: { name: true } },
+        items: {
+          include: {
+            listing: {
+              select: { animalType: true, bloodType: true },
+            },
+          },
+        },
       },
       orderBy: { createdAt: 'desc' },
     })
